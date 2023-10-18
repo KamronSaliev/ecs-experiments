@@ -250,13 +250,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31aa941f5b0c4617b83877913e500f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dimensions:
-    x: 40
-    y: 40
-  NumberTombstoneToSpawn: 100
-  TombstonePrefab: {fileID: 14975308294066400, guid: 40686a6c484c6574386f4e9f32d9d9d9,
+  _dimensions:
+    x: 50
+    y: 50
+  _numberTombstoneToSpawn: 250
+  _tombstonePrefab: {fileID: 14975308294066400, guid: 40686a6c484c6574386f4e9f32d9d9d9,
     type: 3}
-  RandomSeed: 100
+  _randomSeed: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
