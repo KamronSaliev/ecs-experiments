@@ -16,11 +16,6 @@ namespace ECS.Zombies.Systems
         }
 
         [BurstCompile]
-        public void OnDestroy(ref SystemState state)
-        {
-        }
-
-        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             state.Enabled = false;
