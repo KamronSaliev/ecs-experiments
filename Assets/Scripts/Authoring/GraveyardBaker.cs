@@ -8,14 +8,16 @@ namespace ECS.Zombies.Authoring
     {
         public override void Bake(GraveyardMono authoring)
         {
-            AddComponent(new GraveyardProperties
+            var graveyardEntity = GetEntity(TransformUsageFlags.Dynamic);
+            
+            AddComponent(graveyardEntity, new GraveyardProperties
             {
                 Dimensions = authoring.Dimensions,
                 NumberTombstoneToSpawn = authoring.NumberTombstoneToSpawn,
                 TombstonePrefab = GetEntity(authoring.TombstonePrefab, TransformUsageFlags.Dynamic)
             });
             
-            AddComponent(new GraveyardRandom
+            AddComponent(graveyardEntity, new GraveyardRandom
             {
                 Value = Random.CreateFromIndex(authoring.RandomSeed)
             });
