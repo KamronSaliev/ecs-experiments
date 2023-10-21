@@ -3,8 +3,8 @@ using Unity.Mathematics;
 
 namespace ECSExperiments.Components
 {
-    public struct GraveyardRandom : IComponentData
+    public struct EnemySpawnPointsBlob
     {
-        public Random Value;
+        public BlobArray<float3> Value;
     }
 }

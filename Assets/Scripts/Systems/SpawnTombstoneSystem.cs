@@ -1,11 +1,12 @@
-using ECS.Zombies.Aspects;
-using ECS.Zombies.Components;
+using ECSExperiments.Aspects;
+using ECSExperiments.Components;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 
-namespace ECS.Zombies.Systems
+namespace ECSExperiments.Systems
 {
+    [BurstCompile]
     [UpdateInGroup(typeof(InitializationSystemGroup))]
     public partial struct SpawnTombstoneSystem : ISystem
     {
@@ -22,13 +23,26 @@ namespace ECS.Zombies.Systems
 
             var graveyardEntity = SystemAPI.GetSingletonEntity<GraveyardProperties>();
             var graveyardAspect = SystemAPI.GetAspect<GraveyardAspect>(graveyardEntity);
+
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
-            for (var i = 0; i < graveyardAspect.NumberTombstoneToSpawn; i++)
+            using (var builder = new BlobBuilder(Allocator.Temp))
             {
-                var newTombstone = ecb.Instantiate(graveyardAspect.TombstonePrefab);
-                var newTombstoneTransform = graveyardAspect.GetRandomTombstoneTransform();
-                ecb.SetComponent(newTombstone, newTombstoneTransform);
+                ref var enemySpawnPoints = ref builder.ConstructRoot<EnemySpawnPointsBlob>();
+                var arrayBuilder = builder.Allocate(ref enemySpawnPoints.Value, graveyardAspect.NumberTombstoneToSpawn);
+
+                for (var i = 0; i < graveyardAspect.NumberTombstoneToSpawn; i++)
+                {
+                    var newTombstone = ecb.Instantiate(graveyardAspect.TombstonePrefab);
+                    var newTombstoneTransform = graveyardAspect.GetRandomTombstoneTransform();
+                    ecb.SetComponent(newTombstone, newTombstoneTransform);
+
+                    var newEnemySpawnPoint = newTombstoneTransform.Position;
+                    arrayBuilder[i] = newEnemySpawnPoint;
+                }
+
+                var blobAsset = builder.CreateBlobAssetReference<EnemySpawnPointsBlob>(Allocator.Persistent);
+                ecb.SetComponent(graveyardEntity, new EnemySpawnPoints { Value = blobAsset });
             }
 
             ecb.Playback(state.EntityManager);
