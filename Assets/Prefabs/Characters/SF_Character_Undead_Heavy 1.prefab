@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 482300}
   - component: {fileID: 9510036}
   m_Layer: 0
-  m_Name: SF_Character_Undead_Heavy
+  m_Name: SF_Character_Undead_Heavy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
