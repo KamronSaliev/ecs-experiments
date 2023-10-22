@@ -7,7 +7,7 @@ namespace ECSExperiments.Systems
 {
     [BurstCompile]
     [StructLayout(LayoutKind.Auto)]
-    public partial struct SpawnEnemyJob : IJobEntity
+    public partial struct EnemySpawnJob : IJobEntity
     {
         public float DeltaTime;
         public EntityCommandBuffer ECB;

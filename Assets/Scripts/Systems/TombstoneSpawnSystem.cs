@@ -3,12 +3,13 @@ using ECSExperiments.Components;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
 
 namespace ECSExperiments.Systems
 {
     [BurstCompile]
     [UpdateInGroup(typeof(InitializationSystemGroup))]
-    public partial struct SpawnTombstoneSystem : ISystem
+    public partial struct TombstoneSpawnSystem : ISystem
     {
         [BurstCompile]
         public void OnCreate(ref SystemState state)
@@ -26,6 +27,8 @@ namespace ECSExperiments.Systems
 
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
+            var enemySpawnOffset = new float3(0.0f, -2.0f, 1.0f); // TODO: serialize
+
             using (var builder = new BlobBuilder(Allocator.Temp))
             {
                 ref var enemySpawnPoints = ref builder.ConstructRoot<EnemySpawnPointsBlob>();
@@ -37,7 +40,7 @@ namespace ECSExperiments.Systems
                     var newTombstoneTransform = graveyardAspect.GetRandomTombstoneTransform();
                     ecb.SetComponent(newTombstone, newTombstoneTransform);
 
-                    var newEnemySpawnPoint = newTombstoneTransform.Position;
+                    var newEnemySpawnPoint = newTombstoneTransform.Position + enemySpawnOffset;
                     arrayBuilder[i] = newEnemySpawnPoint;
                 }
 

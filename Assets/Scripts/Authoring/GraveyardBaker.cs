@@ -8,9 +8,9 @@ namespace ECSExperiments.Authoring
     {
         public override void Bake(GraveyardMono authoring)
         {
-            var graveyardEntity = GetEntity(TransformUsageFlags.Dynamic);
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent(graveyardEntity, new GraveyardProperties
+            AddComponent(entity, new GraveyardProperties
             {
                 Dimensions = authoring.Dimensions,
                 NumberTombstoneToSpawn = authoring.NumberTombstoneToSpawn,
@@ -19,14 +19,14 @@ namespace ECSExperiments.Authoring
                 EnemySpawnRate = authoring.EnemySpawnRate
             });
 
-            AddComponent(graveyardEntity, new GraveyardRandom
+            AddComponent(entity, new GraveyardRandom
             {
                 Value = Random.CreateFromIndex(authoring.RandomSeed)
             });
 
-            AddComponent<EnemySpawnPoints>(graveyardEntity);
+            AddComponent<EnemySpawnPoints>(entity);
 
-            AddComponent<EnemySpawnTimer>(graveyardEntity);
+            AddComponent<EnemySpawnTimer>(entity);
         }
     }
 }

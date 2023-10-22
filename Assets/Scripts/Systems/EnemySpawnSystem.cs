@@ -4,7 +4,7 @@ using Unity.Entities;
 namespace ECSExperiments.Systems
 {
     [BurstCompile]
-    public partial struct SpawnEnemySystem : ISystem
+    public partial struct EnemySpawnSystem : ISystem
     {
         [BurstCompile]
         public void OnCreate(ref SystemState state)
@@ -18,7 +18,7 @@ namespace ECSExperiments.Systems
             var deltaTime = SystemAPI.Time.DeltaTime;
             var ecb = SystemAPI.GetSingleton<BeginInitializationEntityCommandBufferSystem.Singleton>();
             
-            new SpawnEnemyJob
+            new EnemySpawnJob
             {
                 DeltaTime = deltaTime,
                 ECB = ecb.CreateCommandBuffer(state.WorldUnmanaged)

@@ -17,9 +17,7 @@ namespace ECSExperiments.Aspects
         private const float DefaultScale = 1.0f;
         private const float MinRotationAngle = -0.25f;
         private const float MaxRotationAngle = 0.25f;
-
-        private LocalTransform Transform => _transform.ValueRO;
-
+        
         public int NumberTombstoneToSpawn => _graveyardProperties.ValueRO.NumberTombstoneToSpawn;
         public Entity TombstonePrefab => _graveyardProperties.ValueRO.TombstonePrefab;
         public float EnemySpawnRate => _graveyardProperties.ValueRO.EnemySpawnRate;
@@ -41,7 +39,7 @@ namespace ECSExperiments.Aspects
             do
             {
                 randomPosition = _graveyardRandom.ValueRW.Value.NextFloat3(MinCorner, MaxCorner);
-            } while (math.distancesq(Transform.Position, randomPosition) <= PlayerSafetyRadiusSq);
+            } while (math.distancesq(_transform.ValueRO.Position, randomPosition) <= PlayerSafetyRadiusSq);
 
             return randomPosition;
         }
@@ -51,8 +49,8 @@ namespace ECSExperiments.Aspects
             return quaternion.RotateY(_graveyardRandom.ValueRW.Value.NextFloat(MinRotationAngle, MaxRotationAngle));
         }
 
-        private float3 MinCorner => Transform.Position - HalfDimensions;
-        private float3 MaxCorner => Transform.Position + HalfDimensions;
+        private float3 MinCorner => _transform.ValueRO.Position - HalfDimensions;
+        private float3 MaxCorner => _transform.ValueRO.Position + HalfDimensions;
 
         private float3 HalfDimensions => new
         (
