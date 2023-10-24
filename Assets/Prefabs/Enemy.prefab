@@ -466,6 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _riseRate: 0.5
+  _speed: 0.5
 --- !u!1 &9044115827234658676
 GameObject:
   m_ObjectHideFlags: 0
