@@ -1,4 +1,5 @@
 using ECSExperiments.Components;
+using ECSExperiments.Utilities;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -73,7 +74,7 @@ namespace ECSExperiments.Aspects
             return new LocalTransform
             {
                 Position = position,
-                Rotation = quaternion.identity, // TODO: rotate towards target
+                Rotation = quaternion.RotateY(position.GetDirectionTowardsTarget(_transform.ValueRO.Position)),
                 Scale = DefaultScale
             };
         }
