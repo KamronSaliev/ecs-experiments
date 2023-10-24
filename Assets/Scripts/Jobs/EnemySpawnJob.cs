@@ -3,7 +3,7 @@ using ECSExperiments.Aspects;
 using Unity.Burst;
 using Unity.Entities;
 
-namespace ECSExperiments.Systems
+namespace ECSExperiments.Jobs
 {
     [BurstCompile]
     [StructLayout(LayoutKind.Auto)]

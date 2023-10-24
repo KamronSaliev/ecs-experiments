@@ -5,8 +5,8 @@ using Unity.Entities;
 namespace ECSExperiments.Systems
 {
     [BurstCompile]
-    [UpdateAfter(typeof(EnemySpawnSystem))]
-    public partial struct EnemyRiseSystem : ISystem
+    [UpdateAfter(typeof(EnemyRiseSystem))]
+    public partial struct EnemyWalkSystem : ISystem
     {
         [BurstCompile]
         public void OnCreate(ref SystemState state)
@@ -18,12 +18,11 @@ namespace ECSExperiments.Systems
         public void OnUpdate(ref SystemState state)
         {
             var deltaTime = SystemAPI.Time.DeltaTime;
-            var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
-
-            new EnemyRiseJob
+            
+            new EnemyWalkJob
             {
-                DeltaTime = deltaTime,
-                ECB = ecb.CreateCommandBuffer(state.WorldUnmanaged).AsParallelWriter()
+                DeltaTime = deltaTime
+                
             }.ScheduleParallel();
         }
     }

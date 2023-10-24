@@ -6,6 +6,9 @@ namespace ECSExperiments.Authoring
     {
         public float RiseRate => _riseRate;
 
-        [SerializeField] private float _riseRate = 0.5f;
+        public float Speed => _speed;
+
+        [SerializeField] private float _riseRate;
+        [SerializeField] private float _speed;
     }
 }

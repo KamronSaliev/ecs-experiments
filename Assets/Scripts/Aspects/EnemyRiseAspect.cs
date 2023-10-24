@@ -7,7 +7,7 @@ namespace ECSExperiments.Aspects
 {
     public readonly partial struct EnemyRiseAspect : IAspect
     {
-        public readonly Entity Entity;
+        public readonly Entity Owner;
         
         private readonly RefRW<LocalTransform> _transform;
         private readonly RefRO<EnemyRiseRate> _riseRate;

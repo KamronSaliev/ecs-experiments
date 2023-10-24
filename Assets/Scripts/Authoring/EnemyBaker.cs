@@ -13,6 +13,13 @@ namespace ECSExperiments.Authoring
             {
                 Value = authoring.RiseRate
             });
+            
+            AddComponent(entity, new EnemyWalkProperties()
+            {
+                Speed = authoring.Speed
+            });
+            
+            AddComponent<NewEnemyTag>(entity);
         }
     }
 }

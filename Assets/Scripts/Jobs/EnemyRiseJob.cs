@@ -4,7 +4,7 @@ using ECSExperiments.Components;
 using Unity.Burst;
 using Unity.Entities;
 
-namespace ECSExperiments.Systems
+namespace ECSExperiments.Jobs
 {
     [BurstCompile]
     [StructLayout(LayoutKind.Auto)]
@@ -14,16 +14,18 @@ namespace ECSExperiments.Systems
         public EntityCommandBuffer.ParallelWriter ECB;
 
         [BurstCompile]
-        private void Execute(EnemyRiseAspect enemyRiseAspect, [EntityIndexInQuery] int sortKey)
+        private void Execute(EnemyRiseAspect enemyRiseAspect, [ChunkIndexInQuery] int sortKey)
         {
             enemyRiseAspect.Rise(DeltaTime);
+
             if (!enemyRiseAspect.IsAboveGround)
             {
                 return;
             }
 
             enemyRiseAspect.SetAtGround();
-            ECB.RemoveComponent<EnemyRiseRate>(sortKey, enemyRiseAspect.Entity);
+            ECB.RemoveComponent<EnemyRiseRate>(sortKey, enemyRiseAspect.Owner);
+            ECB.SetComponentEnabled<EnemyWalkProperties>(sortKey, enemyRiseAspect.Owner, true);
         }
     }
 }

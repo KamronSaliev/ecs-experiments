@@ -254,7 +254,7 @@ MonoBehaviour:
   _dimensions:
     x: 50
     y: 50
-  _numberTombstoneToSpawn: 10
+  _numberTombstoneToSpawn: 5
   _tombstonePrefab: {fileID: 14975308294066400, guid: 40686a6c484c6574386f4e9f32d9d9d9,
     type: 3}
   _randomSeed: 42
