@@ -2,13 +2,12 @@ using ECSExperiments.Components;
 using ECSExperiments.Jobs;
 using Unity.Burst;
 using Unity.Entities;
-using Unity.Transforms;
 
 namespace ECSExperiments.Systems
 {
     [BurstCompile]
-    [UpdateAfter(typeof(EnemyRiseSystem))]
-    public partial struct EnemyWalkSystem : ISystem
+    [UpdateAfter(typeof(EnemyWalkSystem))]
+    public partial struct EnemyDamageSystem : ISystem
     {
         [BurstCompile]
         public void OnCreate(ref SystemState state)
@@ -22,16 +21,13 @@ namespace ECSExperiments.Systems
         {
             var deltaTime = SystemAPI.Time.DeltaTime;
             var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
-            
             var playerEntity = SystemAPI.GetSingletonEntity<TagPlayer>();
-            var playerTransform = SystemAPI.GetComponent<LocalTransform>(playerEntity);
 
-            new EnemyWalkJob
+            new EnemyDamageJob
             {
                 DeltaTime = deltaTime,
                 ECB = ecb.CreateCommandBuffer(state.WorldUnmanaged).AsParallelWriter(),
-                PlayerPosition = playerTransform.Position,
-                PlayerAreaRadiusSq = 100  // TODO: Serialize in player mono
+                PlayerEntity = playerEntity
             }.ScheduleParallel();
         }
     }

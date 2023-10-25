@@ -2,7 +2,7 @@ using Unity.Entities;
 
 namespace ECSExperiments.Components
 {
-    public struct NewEnemyTag : IComponentData
+    public struct TagPlayer : IComponentData
     {
     }
 }

@@ -8,18 +8,23 @@ namespace ECSExperiments.Authoring
         public override void Bake(EnemyMono authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            
-            AddComponent(entity, new EnemyRiseRate()
+
+            AddComponent(entity, new EnemyRiseRate
             {
                 Value = authoring.RiseRate
             });
-            
-            AddComponent(entity, new EnemyWalkProperties()
+
+            AddComponent(entity, new EnemyWalkProperties
             {
                 Speed = authoring.Speed
             });
-            
-            AddComponent<NewEnemyTag>(entity);
+
+            AddComponent(entity, new EnemyDamageProperties
+            {
+                DamagePerSecond = authoring.DamagePerSecond
+            });
+
+            AddComponent<TagNewEnemy>(entity);
         }
     }
 }

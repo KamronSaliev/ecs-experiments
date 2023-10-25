@@ -14,11 +14,11 @@ namespace ECSExperiments.Aspects
         private readonly RefRW<EnemySpawnPoints> _enemySpawnPoints;
         private readonly RefRW<EnemySpawnTimer> _enemySpawnTimer;
 
-        private const int PlayerSafetyRadiusSq = 100;
+        private const int PlayerAreaRadiusSq = 100; // TODO: Serialize in player mono
         private const float DefaultScale = 1.0f;
         private const float MinRotationAngle = -0.25f;
         private const float MaxRotationAngle = 0.25f;
-        
+
         public int NumberTombstoneToSpawn => _graveyardProperties.ValueRO.NumberTombstoneToSpawn;
         public Entity TombstonePrefab => _graveyardProperties.ValueRO.TombstonePrefab;
         public float EnemySpawnRate => _graveyardProperties.ValueRO.EnemySpawnRate;
@@ -40,7 +40,7 @@ namespace ECSExperiments.Aspects
             do
             {
                 randomPosition = _graveyardRandom.ValueRW.Value.NextFloat3(MinCorner, MaxCorner);
-            } while (math.distancesq(_transform.ValueRO.Position, randomPosition) <= PlayerSafetyRadiusSq);
+            } while (math.distancesq(_transform.ValueRO.Position, randomPosition) <= PlayerAreaRadiusSq);
 
             return randomPosition;
         }

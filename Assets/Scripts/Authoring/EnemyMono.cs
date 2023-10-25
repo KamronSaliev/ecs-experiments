@@ -8,7 +8,10 @@ namespace ECSExperiments.Authoring
 
         public float Speed => _speed;
 
+        public float DamagePerSecond => _damagePerSecond;
+
         [SerializeField] private float _riseRate;
         [SerializeField] private float _speed;
+        [SerializeField] private float _damagePerSecond;
     }
 }

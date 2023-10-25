@@ -1,5 +1,6 @@
 using ECSExperiments.Components;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace ECSExperiments.Aspects
@@ -14,6 +15,11 @@ namespace ECSExperiments.Aspects
         public void Walk(float deltaTime)
         {
             _transform.ValueRW.Position += _transform.ValueRW.Forward() * _walkProperties.ValueRO.Speed * deltaTime;
+        }
+
+        public bool IsNearPlayer(float3 playerPosition, float playerAreaRadiusSq)
+        {
+            return math.distancesq(playerPosition, _transform.ValueRO.Position) <= playerAreaRadiusSq;
         }
     }
 }

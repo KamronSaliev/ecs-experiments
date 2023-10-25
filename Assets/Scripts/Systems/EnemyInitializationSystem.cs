@@ -14,10 +14,11 @@ namespace ECSExperiments.Systems
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             
-            foreach (var enemy in SystemAPI.Query<EnemyWalkAspect>().WithAll<NewEnemyTag>())
+            foreach (var enemy in SystemAPI.Query<EnemyWalkAspect>().WithAll<TagNewEnemy>())
             {
-                ecb.RemoveComponent<NewEnemyTag>(enemy.Owner);
+                ecb.RemoveComponent<TagNewEnemy>(enemy.Owner);
                 ecb.SetComponentEnabled<EnemyWalkProperties>(enemy.Owner, false);
+                ecb.SetComponentEnabled<EnemyDamageProperties>(enemy.Owner, false);
             }
             
             ecb.Playback(state.EntityManager);
