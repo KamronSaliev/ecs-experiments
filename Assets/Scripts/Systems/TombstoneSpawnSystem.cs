@@ -7,7 +7,6 @@ using Unity.Mathematics;
 
 namespace ECSExperiments.Systems
 {
-    [BurstCompile]
     [UpdateInGroup(typeof(InitializationSystemGroup))]
     public partial struct TombstoneSpawnSystem : ISystem
     {

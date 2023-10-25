@@ -4,7 +4,6 @@ using Unity.Entities;
 
 namespace ECSExperiments.Systems
 {
-    [BurstCompile]
     [UpdateAfter(typeof(EnemySpawnSystem))]
     public partial struct EnemyRiseSystem : ISystem
     {

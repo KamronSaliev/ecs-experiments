@@ -6,10 +6,10 @@ using Unity.Entities;
 
 namespace ECSExperiments.Systems
 {
-    [BurstCompile]
     [UpdateInGroup(typeof(InitializationSystemGroup))]
     public partial struct EnemyInitializationSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);

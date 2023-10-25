@@ -4,7 +4,6 @@ using Unity.Entities;
 
 namespace ECSExperiments.Systems
 {
-    [BurstCompile]
     [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
     public partial struct PlayerGetDamageSystem : ISystem
     {

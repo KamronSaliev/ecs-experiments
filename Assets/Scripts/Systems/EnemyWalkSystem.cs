@@ -6,7 +6,6 @@ using Unity.Transforms;
 
 namespace ECSExperiments.Systems
 {
-    [BurstCompile]
     [UpdateAfter(typeof(EnemyRiseSystem))]
     public partial struct EnemyWalkSystem : ISystem
     {
