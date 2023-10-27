@@ -916,7 +916,7 @@ PlayerSettings:
   cloudProjectId: 4b777f89-8bcc-48a5-992c-3d2ecc35243b
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: ecs-zombies
+  projectName: ecs-experiments
   organizationId: alastork
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
