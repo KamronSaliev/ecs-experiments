@@ -1,5 +1,6 @@
 using ECSExperiments.Components;
 using Unity.Entities;
+using UnityEngine;
 
 namespace ECSExperiments.Authoring
 {
@@ -8,6 +9,8 @@ namespace ECSExperiments.Authoring
         public override void Bake(EnemyAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
+
+            AddComponent<TagNewEnemy>(entity);
 
             AddComponent(entity, new EnemyRiseRate
             {
@@ -24,7 +27,7 @@ namespace ECSExperiments.Authoring
                 DamagePerSecond = authoring.DamagePerSecond
             });
 
-            AddComponent<TagNewEnemy>(entity);
+            Debug.Log($"{typeof(EnemyBaker)}");
         }
     }
 }

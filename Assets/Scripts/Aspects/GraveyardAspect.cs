@@ -11,9 +11,10 @@ namespace ECSExperiments.Aspects
         private readonly RefRO<LocalTransform> _transform;
         private readonly RefRO<GraveyardProperties> _graveyardProperties;
         private readonly RefRW<GraveyardRandom> _graveyardRandom;
+        private readonly RefRO<EnemySpawnProperties> _enemySpawnProperties;
         private readonly RefRW<EnemySpawnPoints> _enemySpawnPoints;
         private readonly RefRW<EnemySpawnTimer> _enemySpawnTimer;
-
+        
         private const int PlayerAreaRadiusSq = 100; // TODO: Serialize in player mono
         private const float DefaultScale = 1.0f;
         private const float MinRotationAngle = -0.25f;
@@ -21,8 +22,10 @@ namespace ECSExperiments.Aspects
 
         public int NumberTombstoneToSpawn => _graveyardProperties.ValueRO.NumberTombstoneToSpawn;
         public Entity TombstonePrefab => _graveyardProperties.ValueRO.TombstonePrefab;
-        public float EnemySpawnRate => _graveyardProperties.ValueRO.EnemySpawnRate;
-        public Entity EnemyPrefab => _graveyardProperties.ValueRO.EnemyPrefab;
+        
+        public float EnemySpawnRate => _enemySpawnProperties.ValueRO.SpawnRate;
+        public float3 EnemySpawnOffset => _enemySpawnProperties.ValueRO.SpawnOffset;
+        public Entity EnemyPrefab => _enemySpawnProperties.ValueRO.EnemyPrefab;
 
         public LocalTransform GetRandomTombstoneTransform()
         {

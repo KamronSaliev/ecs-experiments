@@ -1,6 +1,7 @@
 using ECSExperiments.Components;
 using Unity.Entities;
-using Unity.Mathematics;
+using UnityEngine;
+using Random = Unity.Mathematics.Random;
 
 namespace ECSExperiments.Authoring
 {
@@ -14,9 +15,14 @@ namespace ECSExperiments.Authoring
             {
                 Dimensions = authoring.Dimensions,
                 NumberTombstoneToSpawn = authoring.NumberTombstoneToSpawn,
-                TombstonePrefab = GetEntity(authoring.TombstonePrefab, TransformUsageFlags.Dynamic),
-                EnemyPrefab = GetEntity(authoring.EnemyPrefab, TransformUsageFlags.Dynamic),
-                EnemySpawnRate = authoring.EnemySpawnRate
+                TombstonePrefab = GetEntity(authoring.TombstonePrefab, TransformUsageFlags.Dynamic)
+            });
+
+            AddComponent(entity, new EnemySpawnProperties
+            {
+                SpawnRate = authoring.EnemySpawnRate,
+                SpawnOffset = authoring.EnemySpawnOffset,
+                EnemyPrefab = GetEntity(authoring.EnemyPrefab, TransformUsageFlags.Dynamic)
             });
 
             AddComponent(entity, new GraveyardRandom
@@ -27,6 +33,8 @@ namespace ECSExperiments.Authoring
             AddComponent<EnemySpawnPoints>(entity);
 
             AddComponent<EnemySpawnTimer>(entity);
+
+            Debug.Log($"{typeof(GraveyardBaker)}");
         }
     }
 }

@@ -1,5 +1,6 @@
 using ECSExperiments.Components;
 using Unity.Entities;
+using UnityEngine;
 
 namespace ECSExperiments.Authoring
 {
@@ -18,6 +19,8 @@ namespace ECSExperiments.Authoring
             });
 
             AddBuffer<PlayerDamageBuffer>(entity);
+            
+            Debug.Log($"{typeof(PlayerBaker)}");
         }
     }
 }

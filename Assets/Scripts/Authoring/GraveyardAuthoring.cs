@@ -13,15 +13,22 @@ namespace ECSExperiments.Authoring
 
         public uint RandomSeed => _randomSeed;
 
-        public GameObject EnemyPrefab => _enemyPrefab;
 
         public float EnemySpawnRate => _enemySpawnRate;
+
+        public float3 EnemySpawnOffset => _enemySpawnOffset;
+
+        public GameObject EnemyPrefab => _enemyPrefab;
+
 
         [SerializeField] private float2 _dimensions;
         [SerializeField] private int _numberTombstoneToSpawn;
         [SerializeField] private GameObject _tombstonePrefab;
+        
         [SerializeField] private uint _randomSeed;
-        [SerializeField] private GameObject _enemyPrefab;
+        
         [SerializeField] private float _enemySpawnRate;
+        [SerializeField] private float3 _enemySpawnOffset;
+        [SerializeField] private GameObject _enemyPrefab;
     }
 }

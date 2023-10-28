@@ -3,7 +3,6 @@ using ECSExperiments.Components;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
 
 namespace ECSExperiments.Systems
 {
@@ -23,10 +22,9 @@ namespace ECSExperiments.Systems
 
             var graveyardEntity = SystemAPI.GetSingletonEntity<GraveyardProperties>();
             var graveyardAspect = SystemAPI.GetAspect<GraveyardAspect>(graveyardEntity);
+            var enemySpawnOffset = graveyardAspect.EnemySpawnOffset;
 
             var ecb = new EntityCommandBuffer(Allocator.Temp);
-
-            var enemySpawnOffset = new float3(0.0f, -2.0f, 1.0f); // TODO: serialize
 
             using (var builder = new BlobBuilder(Allocator.Temp))
             {

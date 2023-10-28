@@ -8,7 +8,5 @@ namespace ECSExperiments.Components
         public float2 Dimensions;
         public int NumberTombstoneToSpawn;
         public Entity TombstonePrefab;
-        public Entity EnemyPrefab;
-        public float EnemySpawnRate;
     }
 }
