@@ -27,6 +27,11 @@ namespace ECSExperiments.Authoring
                 DamagePerSecond = authoring.DamagePerSecond
             });
 
+            AddComponentObject(entity, new GameObjectReference
+            {
+                Value = authoring.Prefab
+            });
+
             Debug.Log($"{typeof(EnemyBaker)}");
         }
     }

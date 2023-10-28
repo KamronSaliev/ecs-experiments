@@ -272,12 +272,13 @@ MonoBehaviour:
   _tombstonePrefab: {fileID: 14975308294066400, guid: 40686a6c484c6574386f4e9f32d9d9d9,
     type: 3}
   _randomSeed: 42
-  _enemySpawnRate: 0.01
+  _enemySpawnRate: 0.1
   _enemySpawnOffset:
     x: 0
     y: -5
     z: 1
-  _enemyPrefab: {fileID: 175986, guid: cdc26bac7dd09f24082080f45f2cd4ba, type: 3}
+  _enemyPrefab: {fileID: 9044115827107593775, guid: c0ccb488695fc274198cb7fcf7ed14df,
+    type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
