@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ECSExperiments.Authoring
 {
-    public class GraveyardMono : MonoBehaviour
+    public class GraveyardAuthoring : MonoBehaviour
     {
         public float2 Dimensions => _dimensions;
 

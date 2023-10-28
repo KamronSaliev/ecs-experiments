@@ -4,9 +4,9 @@ using Unity.Mathematics;
 
 namespace ECSExperiments.Authoring
 {
-    public class GraveyardBaker : Baker<GraveyardMono>
+    public class GraveyardBaker : Baker<GraveyardAuthoring>
     {
-        public override void Bake(GraveyardMono authoring)
+        public override void Bake(GraveyardAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 

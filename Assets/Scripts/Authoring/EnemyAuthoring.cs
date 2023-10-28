@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ECSExperiments.Authoring
 {
-    public class EnemyMono : MonoBehaviour
+    public class EnemyAuthoring : MonoBehaviour
     {
         public float RiseRate => _riseRate;
 

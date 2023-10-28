@@ -3,9 +3,9 @@ using Unity.Entities;
 
 namespace ECSExperiments.Authoring
 {
-    public class PlayerBaker : Baker<PlayerMono>
+    public class PlayerBaker : Baker<PlayerAuthoring>
     {
-        public override void Bake(PlayerMono authoring)
+        public override void Bake(PlayerAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 

@@ -3,9 +3,9 @@ using Unity.Entities;
 
 namespace ECSExperiments.Authoring
 {
-    public class EnemyBaker : Baker<EnemyMono>
+    public class EnemyBaker : Baker<EnemyAuthoring>
     {
-        public override void Bake(EnemyMono authoring)
+        public override void Bake(EnemyAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 

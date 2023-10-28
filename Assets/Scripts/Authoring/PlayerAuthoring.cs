@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ECSExperiments.Authoring
 {
-    public class PlayerMono : MonoBehaviour
+    public class PlayerAuthoring : MonoBehaviour
     {
         public float Health => _health;
 
