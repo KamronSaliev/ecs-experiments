@@ -1,4 +1,3 @@
-/*using ECSExperiments.Components;
 using ECSExperiments.Components.Common;
 using ECSExperiments.Components.Tags;
 using Unity.Collections;
@@ -8,7 +7,7 @@ using UnityEngine;
 namespace ECSExperiments.Systems
 {
     [UpdateInGroup(typeof(InitializationSystemGroup))]
-    public partial struct EnemyInitializationSystem : ISystem
+    public partial struct UnitInitializationSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)
         {
@@ -19,7 +18,7 @@ namespace ECSExperiments.Systems
                 var gameObject = Object.Instantiate(gameObjectReference.Value);
 
                 ecb.RemoveComponent<GameObjectReferenceComponent>(entity);
-                ecb.RemoveComponent<TagNewEnemy>(entity);
+                ecb.RemoveComponent<TagNewUnit>(entity);
 
                 ecb.AddComponent(entity, new TransformReferenceComponent
                 {
@@ -35,4 +34,4 @@ namespace ECSExperiments.Systems
             ecb.Playback(state.EntityManager);
         }
     }
-}*/
+}

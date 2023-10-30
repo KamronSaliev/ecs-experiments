@@ -1,23 +1,16 @@
-using ECSExperiments.Components;
 using ECSExperiments.Components.Common;
 using ECSExperiments.Components.Tags;
 using Unity.Entities;
-using UnityEngine;
 
 namespace ECSExperiments.Authoring
 {
-    public class EnemyBaker : Baker<EnemyAuthoring>
+    public class UnitBaker : Baker<UnitAuthoring>
     {
-        public override void Bake(EnemyAuthoring authoring)
+        public override void Bake(UnitAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent<TagNewEnemy>(entity);
-
-            AddComponent(entity, new EnemyRiseRate
-            {
-                Value = authoring.RiseRate
-            });
+            AddComponent<TagNewUnit>(entity);
 
             AddComponentObject(entity, new GameObjectReferenceComponent
             {

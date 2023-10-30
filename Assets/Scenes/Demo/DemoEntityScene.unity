@@ -203,7 +203,7 @@ MonoBehaviour:
   _dimensions:
     x: 30
     y: 30
-  _positionsCount: 20
+  _positionsCount: 5
   _demoPrefab: {fileID: 14975308294066400, guid: 40686a6c484c6574386f4e9f32d9d9d9,
     type: 3}
   _randomSeed: 42
