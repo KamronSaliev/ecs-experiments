@@ -1,5 +1,6 @@
 using ECSExperiments.Components;
 using ECSExperiments.Components.Common;
+using ECSExperiments.Components.Spawner;
 using Unity.Entities;
 using Random = Unity.Mathematics.Random;
 
@@ -18,7 +19,7 @@ namespace ECSExperiments.Authoring
                 TombstonePrefab = GetEntity(authoring.TombstonePrefab, TransformUsageFlags.Dynamic)
             });
 
-            AddComponent(entity, new EnemySpawnProperties
+            AddComponent(entity, new SpawnDataComponent
             {
                 SpawnRate = authoring.EnemySpawnRate,
                 SpawnOffset = authoring.EnemySpawnOffset,
@@ -30,9 +31,9 @@ namespace ECSExperiments.Authoring
                 Value = Random.CreateFromIndex(authoring.RandomSeed)
             });
 
-            AddComponent<EnemySpawnPoints>(entity);
+            AddComponent<SpawnPointsComponent>(entity);
 
-            AddComponent<EnemySpawnTimer>(entity);
+            AddComponent<TimerComponent>(entity);
         }
     }
 }

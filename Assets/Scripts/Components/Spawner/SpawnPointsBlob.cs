@@ -1,9 +1,9 @@
 using Unity.Entities;
 using Unity.Mathematics;
 
-namespace ECSExperiments.Components
+namespace ECSExperiments.Components.Spawner
 {
-    public struct EnemySpawnPointsBlob
+    public struct SpawnPointsBlob
     {
         public BlobArray<float3> Value;
     }

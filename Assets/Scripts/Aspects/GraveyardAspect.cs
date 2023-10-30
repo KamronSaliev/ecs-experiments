@@ -1,5 +1,6 @@
 using ECSExperiments.Components;
 using ECSExperiments.Components.Common;
+using ECSExperiments.Components.Spawner;
 using ECSExperiments.Utilities;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -12,9 +13,9 @@ namespace ECSExperiments.Aspects
         private readonly RefRO<LocalTransform> _transform;
         private readonly RefRO<GraveyardProperties> _graveyardProperties;
         private readonly RefRW<RandomComponent> _random;
-        private readonly RefRO<EnemySpawnProperties> _enemySpawnProperties;
-        private readonly RefRW<EnemySpawnPoints> _enemySpawnPoints;
-        private readonly RefRW<EnemySpawnTimer> _enemySpawnTimer;
+        private readonly RefRO<SpawnDataComponent> _enemySpawnProperties;
+        private readonly RefRW<SpawnPointsComponent> _enemySpawnPoints;
+        private readonly RefRW<TimerComponent> _enemySpawnTimer;
         
         private const int PlayerAreaRadiusSq = 100; // TODO: Serialize in player mono
         private const float DefaultScale = 1.0f;

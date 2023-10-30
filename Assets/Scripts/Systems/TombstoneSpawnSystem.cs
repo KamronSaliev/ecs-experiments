@@ -1,5 +1,6 @@
 using ECSExperiments.Aspects;
 using ECSExperiments.Components;
+using ECSExperiments.Components.Spawner;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -28,7 +29,7 @@ namespace ECSExperiments.Systems
 
             using (var builder = new BlobBuilder(Allocator.Temp))
             {
-                ref var enemySpawnPoints = ref builder.ConstructRoot<EnemySpawnPointsBlob>();
+                ref var enemySpawnPoints = ref builder.ConstructRoot<SpawnPointsBlob>();
                 var arrayBuilder = builder.Allocate(ref enemySpawnPoints.Value, graveyardAspect.NumberTombstoneToSpawn);
 
                 for (var i = 0; i < graveyardAspect.NumberTombstoneToSpawn; i++)
@@ -41,8 +42,8 @@ namespace ECSExperiments.Systems
                     arrayBuilder[i] = newEnemySpawnPoint;
                 }
 
-                var blobAsset = builder.CreateBlobAssetReference<EnemySpawnPointsBlob>(Allocator.Persistent);
-                ecb.SetComponent(graveyardEntity, new EnemySpawnPoints { Value = blobAsset });
+                var blobAsset = builder.CreateBlobAssetReference<SpawnPointsBlob>(Allocator.Persistent);
+                ecb.SetComponent(graveyardEntity, new SpawnPointsComponent { Value = blobAsset });
             }
 
             ecb.Playback(state.EntityManager);

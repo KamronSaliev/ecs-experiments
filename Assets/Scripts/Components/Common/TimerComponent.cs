@@ -2,7 +2,7 @@ using Unity.Entities;
 
 namespace ECSExperiments.Components
 {
-    public struct EnemySpawnTimer : IComponentData
+    public struct TimerComponent : IComponentData
     {
         public float Value;
     }
