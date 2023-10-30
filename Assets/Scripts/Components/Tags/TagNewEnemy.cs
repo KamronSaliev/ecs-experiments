@@ -1,6 +1,6 @@
 using Unity.Entities;
 
-namespace ECSExperiments.Components
+namespace ECSExperiments.Components.Tags
 {
     public struct TagNewEnemy : IComponentData
     {

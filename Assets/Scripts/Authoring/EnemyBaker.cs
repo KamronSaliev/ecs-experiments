@@ -1,5 +1,6 @@
 using ECSExperiments.Components;
 using ECSExperiments.Components.Common;
+using ECSExperiments.Components.Tags;
 using Unity.Entities;
 using UnityEngine;
 
@@ -16,16 +17,6 @@ namespace ECSExperiments.Authoring
             AddComponent(entity, new EnemyRiseRate
             {
                 Value = authoring.RiseRate
-            });
-
-            AddComponent(entity, new EnemyWalkProperties
-            {
-                Speed = authoring.Speed
-            });
-
-            AddComponent(entity, new EnemyDamageProperties
-            {
-                DamagePerSecond = authoring.DamagePerSecond
             });
 
             AddComponentObject(entity, new GameObjectReferenceComponent

@@ -1,5 +1,6 @@
 using ECSExperiments.Components;
 using ECSExperiments.Components.Common;
+using ECSExperiments.Components.Tags;
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
@@ -19,9 +20,6 @@ namespace ECSExperiments.Systems
 
                 ecb.RemoveComponent<GameObjectReferenceComponent>(entity);
                 ecb.RemoveComponent<TagNewEnemy>(entity);
-
-                ecb.SetComponentEnabled<EnemyWalkProperties>(entity, false);
-                ecb.SetComponentEnabled<EnemyDamageProperties>(entity, false);
 
                 ecb.AddComponent(entity, new TransformReferenceComponent
                 {

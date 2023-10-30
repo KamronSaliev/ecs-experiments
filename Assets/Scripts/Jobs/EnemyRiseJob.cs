@@ -25,7 +25,6 @@ namespace ECSExperiments.Jobs
 
             enemyRiseAspect.SetAtGround();
             ECB.RemoveComponent<EnemyRiseRate>(sortKey, enemyRiseAspect.Owner);
-            ECB.SetComponentEnabled<EnemyWalkProperties>(sortKey, enemyRiseAspect.Owner, true);
         }
     }
 }
