@@ -1,6 +1,6 @@
 using ECSExperiments.Components;
+using ECSExperiments.Components.Common;
 using Unity.Entities;
-using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
 namespace ECSExperiments.Authoring
@@ -25,7 +25,7 @@ namespace ECSExperiments.Authoring
                 EnemyPrefab = GetEntity(authoring.EnemyPrefab, TransformUsageFlags.Dynamic)
             });
 
-            AddComponent(entity, new GraveyardRandom
+            AddComponent(entity, new RandomComponent
             {
                 Value = Random.CreateFromIndex(authoring.RandomSeed)
             });

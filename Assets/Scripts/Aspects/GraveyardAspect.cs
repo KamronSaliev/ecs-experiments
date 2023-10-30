@@ -1,4 +1,5 @@
 using ECSExperiments.Components;
+using ECSExperiments.Components.Common;
 using ECSExperiments.Utilities;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -10,7 +11,7 @@ namespace ECSExperiments.Aspects
     {
         private readonly RefRO<LocalTransform> _transform;
         private readonly RefRO<GraveyardProperties> _graveyardProperties;
-        private readonly RefRW<GraveyardRandom> _graveyardRandom;
+        private readonly RefRW<RandomComponent> _random;
         private readonly RefRO<EnemySpawnProperties> _enemySpawnProperties;
         private readonly RefRW<EnemySpawnPoints> _enemySpawnPoints;
         private readonly RefRW<EnemySpawnTimer> _enemySpawnTimer;
@@ -42,7 +43,7 @@ namespace ECSExperiments.Aspects
             float3 randomPosition;
             do
             {
-                randomPosition = _graveyardRandom.ValueRW.Value.NextFloat3(MinCorner, MaxCorner);
+                randomPosition = _random.ValueRW.Value.NextFloat3(MinCorner, MaxCorner);
             } while (math.distancesq(_transform.ValueRO.Position, randomPosition) <= PlayerAreaRadiusSq);
 
             return randomPosition;
@@ -50,7 +51,7 @@ namespace ECSExperiments.Aspects
 
         private quaternion GetRandomTombstoneRotation()
         {
-            return quaternion.RotateY(_graveyardRandom.ValueRW.Value.NextFloat(MinRotationAngle, MaxRotationAngle));
+            return quaternion.RotateY(_random.ValueRW.Value.NextFloat(MinRotationAngle, MaxRotationAngle));
         }
 
         private float3 MinCorner => _transform.ValueRO.Position - HalfDimensions;
@@ -84,7 +85,7 @@ namespace ECSExperiments.Aspects
 
         private float3 GetRandomEnemySpawnPointPosition()
         {
-            var randomIndex = _graveyardRandom.ValueRW.Value.NextInt(0, EnemySpawnPointsCount);
+            var randomIndex = _random.ValueRW.Value.NextInt(0, EnemySpawnPointsCount);
             return GetEnemySpawnPoint(randomIndex);
         }
 

@@ -1,4 +1,5 @@
 using ECSExperiments.Components;
+using ECSExperiments.Components.Common;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace ECSExperiments.Systems
         public void OnUpdate(ref SystemState state)
         {
             foreach (var (transform, transformReference, animatorReference) in SystemAPI
-                         .Query<LocalTransform, TransformReference, AnimatorReference>())
+                         .Query<LocalTransform, TransformReferenceComponent, AnimatorReferenceComponent>())
             {
                 transformReference.Value.position = transform.Position;
                 transformReference.Value.rotation = transform.Rotation;

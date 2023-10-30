@@ -1,4 +1,5 @@
 using ECSExperiments.Components;
+using ECSExperiments.Components.Common;
 using Unity.Entities;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace ECSExperiments.Authoring
                 DamagePerSecond = authoring.DamagePerSecond
             });
 
-            AddComponentObject(entity, new GameObjectReference
+            AddComponentObject(entity, new GameObjectReferenceComponent
             {
                 Value = authoring.Prefab
             });

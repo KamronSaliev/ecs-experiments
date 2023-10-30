@@ -1,4 +1,5 @@
 using ECSExperiments.Components;
+using ECSExperiments.Components.Common;
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
@@ -12,22 +13,22 @@ namespace ECSExperiments.Systems
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
-            foreach (var (gameObjectReference, entity) in SystemAPI.Query<GameObjectReference>().WithEntityAccess())
+            foreach (var (gameObjectReference, entity) in SystemAPI.Query<GameObjectReferenceComponent>().WithEntityAccess())
             {
                 var gameObject = Object.Instantiate(gameObjectReference.Value);
 
-                ecb.RemoveComponent<GameObjectReference>(entity);
+                ecb.RemoveComponent<GameObjectReferenceComponent>(entity);
                 ecb.RemoveComponent<TagNewEnemy>(entity);
 
                 ecb.SetComponentEnabled<EnemyWalkProperties>(entity, false);
                 ecb.SetComponentEnabled<EnemyDamageProperties>(entity, false);
 
-                ecb.AddComponent(entity, new TransformReference
+                ecb.AddComponent(entity, new TransformReferenceComponent
                 {
                     Value = gameObject.transform
                 });
 
-                ecb.AddComponent(entity, new AnimatorReference
+                ecb.AddComponent(entity, new AnimatorReferenceComponent
                 {
                     Value = gameObject.GetComponent<Animator>()
                 });
