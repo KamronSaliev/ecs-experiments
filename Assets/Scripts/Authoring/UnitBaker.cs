@@ -1,5 +1,5 @@
 using ECSExperiments.Components.Common;
-using ECSExperiments.Components.Tags;
+using ECSExperiments.Components.Unit;
 using Unity.Entities;
 
 namespace ECSExperiments.Authoring
@@ -10,7 +10,7 @@ namespace ECSExperiments.Authoring
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent<TagNewUnit>(entity);
+            AddComponent<TagUnitNew>(entity);
 
             AddComponentObject(entity, new GameObjectReferenceComponent
             {

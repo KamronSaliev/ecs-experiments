@@ -1,5 +1,5 @@
 using ECSExperiments.Components.Common;
-using ECSExperiments.Components.Tags;
+using ECSExperiments.Components.Unit;
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
@@ -18,7 +18,7 @@ namespace ECSExperiments.Systems
                 var gameObject = Object.Instantiate(gameObjectReference.Value);
 
                 ecb.RemoveComponent<GameObjectReferenceComponent>(entity);
-                ecb.RemoveComponent<TagNewUnit>(entity);
+                ecb.RemoveComponent<TagUnitNew>(entity);
 
                 ecb.AddComponent(entity, new TransformReferenceComponent
                 {

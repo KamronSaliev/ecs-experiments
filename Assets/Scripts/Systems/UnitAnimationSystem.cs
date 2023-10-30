@@ -19,7 +19,7 @@ namespace ECSExperiments.Systems
             {
                 transformReference.Value.position = transform.Position;
                 transformReference.Value.rotation = transform.Rotation;
-                animatorReference.Value.SetFloat(SpeedF, MinSpeedF);
+                animatorReference.Value.SetFloat(SpeedF, MaxSpeedF);
             }
         }
     }
