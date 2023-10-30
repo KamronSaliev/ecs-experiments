@@ -6,7 +6,6 @@ namespace ECSExperiments.Components
     public struct SpawnDataComponent : IComponentData
     {
         public float SpawnRate;
-        public float3 SpawnOffset;
-        public Entity EnemyPrefab;
+        public Entity Prefab;
     }
 }

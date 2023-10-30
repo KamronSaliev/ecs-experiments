@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+/*using System.Runtime.InteropServices;
 using ECSExperiments.Aspects;
 using ECSExperiments.Components;
 using Unity.Burst;
@@ -27,4 +27,4 @@ namespace ECSExperiments.Jobs
             ECB.RemoveComponent<EnemyRiseRate>(sortKey, enemyRiseAspect.Owner);
         }
     }
-}
+}*/

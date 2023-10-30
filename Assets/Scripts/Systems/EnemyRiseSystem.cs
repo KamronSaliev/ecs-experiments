@@ -1,10 +1,10 @@
-using ECSExperiments.Jobs;
+/*using ECSExperiments.Jobs;
 using Unity.Burst;
 using Unity.Entities;
 
 namespace ECSExperiments.Systems
 {
-    [UpdateAfter(typeof(EnemySpawnSystem))]
+    [UpdateAfter(typeof(UnitSpawnSystem))]
     public partial struct EnemyRiseSystem : ISystem
     {
         [BurstCompile]
@@ -26,4 +26,4 @@ namespace ECSExperiments.Systems
             }.ScheduleParallel();
         }
     }
-}
+}*/

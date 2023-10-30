@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 1866800997}
   - component: {fileID: 1866800998}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Battlefield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,18 +201,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dimensions:
-    x: 50
-    y: 50
-  _numberTombstoneToSpawn: 250
-  _tombstonePrefab: {fileID: 14975308294066400, guid: 40686a6c484c6574386f4e9f32d9d9d9,
+    x: 30
+    y: 30
+  _positionsCount: 20
+  _demoPrefab: {fileID: 14975308294066400, guid: 40686a6c484c6574386f4e9f32d9d9d9,
     type: 3}
   _randomSeed: 42
-  _enemySpawnRate: 0.1
-  _enemySpawnOffset:
-    x: 0
-    y: -5
-    z: 1
-  _enemyPrefab: {fileID: 9044115827107593775, guid: c0ccb488695fc274198cb7fcf7ed14df,
+  _unitSpawnRate: 1
+  _unitPrefab: {fileID: 9044115827107593775, guid: c0ccb488695fc274198cb7fcf7ed14df,
     type: 3}
 --- !u!1 &1889147866
 GameObject:

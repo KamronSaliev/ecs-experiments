@@ -3,7 +3,7 @@ using Unity.Mathematics;
 
 namespace ECSExperiments.Components.Spawner
 {
-    public struct SpawnPointsBlob
+    public struct SpawnPositionsBlob
     {
         public BlobArray<float3> Value;
     }

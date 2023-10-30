@@ -1,4 +1,4 @@
-using ECSExperiments.Components;
+/*using ECSExperiments.Components;
 using ECSExperiments.Components.Common;
 using ECSExperiments.Components.Tags;
 using Unity.Collections;
@@ -35,4 +35,4 @@ namespace ECSExperiments.Systems
             ecb.Playback(state.EntityManager);
         }
     }
-}
+}*/
