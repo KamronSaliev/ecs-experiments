@@ -19,8 +19,6 @@ namespace ECSExperiments.Authoring
             });
 
             AddBuffer<PlayerDamageBuffer>(entity);
-            
-            Debug.Log($"{typeof(PlayerBaker)}");
         }
     }
 }

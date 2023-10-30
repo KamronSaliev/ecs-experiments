@@ -31,8 +31,6 @@ namespace ECSExperiments.Authoring
             {
                 Value = authoring.Prefab
             });
-
-            Debug.Log($"{typeof(EnemyBaker)}");
         }
     }
 }

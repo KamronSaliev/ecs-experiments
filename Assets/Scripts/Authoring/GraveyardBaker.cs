@@ -33,8 +33,6 @@ namespace ECSExperiments.Authoring
             AddComponent<EnemySpawnPoints>(entity);
 
             AddComponent<EnemySpawnTimer>(entity);
-
-            Debug.Log($"{typeof(GraveyardBaker)}");
         }
     }
 }
