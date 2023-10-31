@@ -1,5 +1,6 @@
 using ECSExperiments.Components.Common;
 using ECSExperiments.Components.Unit;
+using ProjectDawn.Navigation;
 using Unity.Entities;
 
 namespace ECSExperiments.Authoring
@@ -11,6 +12,24 @@ namespace ECSExperiments.Authoring
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
             AddComponent<TagUnitNew>(entity);
+            
+            AddComponent<DrawGizmos>(entity);
+
+            AddComponent(entity, new UnitTeamComponent
+            {
+                Value = authoring.UnitTeamID
+            });
+
+            AddComponent(entity, new UnitStateComponent
+            {
+                Value = UnitState.Idle
+            });
+
+            AddComponent(entity, new UnitLifeComponent
+            {
+                Life = authoring.MaxLife,
+                MaxLife = authoring.MaxLife
+            });
 
             AddComponentObject(entity, new GameObjectReferenceComponent
             {

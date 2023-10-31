@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9044115827107593774}
   - component: {fileID: 9088573659683277228}
+  - component: {fileID: 7306143217359310041}
+  - component: {fileID: 8689369445871710134}
+  - component: {fileID: 5179250817791216396}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -44,7 +47,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2e4c9ce2a04e86adeddea5a93c0f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _riseRate: 3
-  _speed: 3
-  _damagePerSecond: 1
+  _unitTeamID: 0
+  _maxLife: 100
   _prefab: {fileID: 175986, guid: cdc26bac7dd09f24082080f45f2cd4ba, type: 3}
+--- !u!114 &7306143217359310041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9044115827107593775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825ee44755f2e4846a6229365ed8d44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MotionType: 2
+  Speed: 3.5
+  Acceleration: 8
+  AngularSpeed: 120
+  StoppingDistance: 0.1
+  AutoBreaking: 1
+--- !u!114 &8689369445871710134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9044115827107593775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed5c6dd07c7d6e4f857b420fa8f559a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Radius: 0.9
+  Height: 3
+--- !u!114 &5179250817791216396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9044115827107593775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d72058503702eb42aca97d680e69de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
