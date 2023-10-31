@@ -16,7 +16,7 @@ namespace ProjectDawn.Navigation.Hybrid
         NativeQueue<Entity> m_Entities;
         NativeQueue<float3> m_Destinations;
 
-        [BurstCompile]
+        //[BurstCompile]
         public void OnCreate(ref SystemState state)
         {
             m_BodyLookup = GetComponentLookup<AgentBody>(isReadOnly:false);
@@ -30,6 +30,7 @@ namespace ProjectDawn.Navigation.Hybrid
             });
         }
 
+        //[BurstCompile]
         public void OnDestroy(ref SystemState state)
         {
             m_Entities.Dispose();

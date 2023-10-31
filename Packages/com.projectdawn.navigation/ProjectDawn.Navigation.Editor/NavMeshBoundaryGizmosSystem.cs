@@ -22,14 +22,14 @@ namespace ProjectDawn.Navigation.Editor
             var gizmos = GetSingletonRW<GizmosSystem.Singleton>();
             new Job
             {
-                Gizmos = gizmos.ValueRW.CreateCommandBuffer().AsParallelWriter(),
-            }.ScheduleParallel();
+                Gizmos = gizmos.ValueRW.CreateCommandBuffer(),
+            }.Schedule();
         }
 
         [BurstCompile]
         partial struct Job : IJobEntity
         {
-            public GizmosCommandBuffer.ParallelWriter Gizmos;
+            public GizmosCommandBuffer Gizmos;
 
             public void Execute(in AgentShape shape, in DynamicBuffer<NavMeshWall> walls, in LocalTransform transform, in DrawGizmos drawGizmos)
             {

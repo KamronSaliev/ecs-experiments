@@ -9,6 +9,30 @@ using static Unity.Entities.SystemAPI;
 
 namespace ProjectDawn.Navigation
 {
+    [UnityEditor.InitializeOnLoad]
+    static class SceneGizmosDrawer
+    {
+        static SceneGizmosDrawer()
+        {
+            UnityEditor.SceneView.duringSceneGui -= Draw;
+            UnityEditor.SceneView.duringSceneGui += Draw;
+        }
+
+        static void Draw(UnityEditor.SceneView sceneView)
+        {
+            if (Event.current.type != EventType.Repaint)
+                return;
+            var world = World.DefaultGameObjectInjectionWorld;
+            if (world == null)
+                return;
+            var gizmosSystem = world.Unmanaged.GetExistingUnmanagedSystem<GizmosSystem>();
+            if (gizmosSystem == SystemHandle.Null)
+                return;
+            var gizmos = world.EntityManager.GetComponentData<GizmosSystem.Singleton>(gizmosSystem);
+            gizmos.ExecuteCommandBuffers();
+        }
+    }
+
     [BurstCompile]
     [UpdateInGroup(typeof(InitializationSystemGroup))]
     public unsafe partial struct GizmosSystem : ISystem

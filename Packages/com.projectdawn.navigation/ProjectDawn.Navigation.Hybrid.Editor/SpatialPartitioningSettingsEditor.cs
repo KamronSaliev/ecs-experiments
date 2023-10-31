@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEditor;
+using System;
 
 namespace ProjectDawn.Navigation.Hybrid.Editor
 {
+    [Obsolete("This class is obsolete, please use new settings workflow https://lukaschod.github.io/agents-navigation-docs/manual/settings.html.")]
     [CustomEditor(typeof(SettingsBehaviour), true)]
     internal class AgentPartitioningSettingsEditor : UnityEditor.Editor
     {

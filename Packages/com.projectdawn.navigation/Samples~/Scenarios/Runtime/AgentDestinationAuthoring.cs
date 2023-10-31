@@ -9,6 +9,7 @@ namespace ProjectDawn.Navigation.Sample.Scenarios
     {
         public Transform Target;
         public float Radius;
+        public bool EveryFrame;
 
         private void Start()
         {
@@ -17,6 +18,13 @@ namespace ProjectDawn.Navigation.Sample.Scenarios
             body.Destination = Target.position;
             body.IsStopped = false;
             agent.EntityBody = body;
+        }
+
+        void Update()
+        {
+            if (!EveryFrame)
+                return;
+            Start();
         }
     }
 }

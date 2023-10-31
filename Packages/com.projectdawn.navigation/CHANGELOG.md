@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this package will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
+## [3.3.5] - 2023-10-25
+- Fixed gizmos drawing for multiple game objects and entities
+- Changed ECS gizmos drawing no longer requires to select agent authoring
+- Changed GizmosCommandBuffer no longer has parallel version. As this simplifies gizmos logic and did not worked correctly any way
+
+## [3.3.4] - 2023-10-13
+- Fixed performance regression with query capacity
+- Fixed samples script agent destination missing reference
+- Fixed "Leak Detected : Persistent allocates 257 individual allocations" (Made workaround to unity bug that leaks bursted System.OnCreate)
+
 ## [3.3.3] - 2023-09-18
 - Changed NavMeshQueryStatus.Finished to be obsolete, use FinishedFullPath or FinishedPartialPath. This changes allows distinguish reachable from unreachable paths
 - Fixed Regular Update to skip frame with delta zero

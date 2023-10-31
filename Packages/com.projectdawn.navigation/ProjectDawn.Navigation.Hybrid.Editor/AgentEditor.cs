@@ -86,9 +86,13 @@ namespace ProjectDawn.Navigation.Hybrid.Editor
                 if (world == null)
                     return;
                 var manager = world.EntityManager;
-                if (!manager.HasComponent<DrawGizmos>(Agent.GetOrCreateEntity()))
+                foreach (var target in targets)
                 {
-                    manager.AddComponent<DrawGizmos>(Agent.GetOrCreateEntity());
+                    var agent = target as AgentAuthoring;
+                    if (!manager.HasComponent<DrawGizmos>(agent.GetOrCreateEntity()))
+                    {
+                        manager.AddComponent<DrawGizmos>(agent.GetOrCreateEntity());
+                    }
                 }
             }
         }
@@ -101,27 +105,15 @@ namespace ProjectDawn.Navigation.Hybrid.Editor
                 if (world == null)
                     return;
                 var manager = world.EntityManager;
-                if (manager.HasComponent<DrawGizmos>(Agent.GetOrCreateEntity()))
+                foreach (var target in targets)
                 {
-                    manager.RemoveComponent<DrawGizmos>(Agent.GetOrCreateEntity());
+                    var agent = target as AgentAuthoring;
+                    if (manager.HasComponent<DrawGizmos>(agent.GetOrCreateEntity()))
+                    {
+                        manager.RemoveComponent<DrawGizmos>(agent.GetOrCreateEntity());
+                    }
                 }
             }
-        }
-
-        void OnSceneGUI()
-        {
-            // Call OnSceneGUI only once
-            if (target == Selection.activeObject)
-                return;
-
-            var world = World.DefaultGameObjectInjectionWorld;
-            if (world == null)
-                return;
-            var gizmosSystem = world.Unmanaged.GetExistingUnmanagedSystem<GizmosSystem>();
-            if (gizmosSystem == SystemHandle.Null)
-                return;
-            var gizmos = world.EntityManager.GetComponentData<GizmosSystem.Singleton>(gizmosSystem);
-            gizmos.ExecuteCommandBuffers();
         }
     }
 }

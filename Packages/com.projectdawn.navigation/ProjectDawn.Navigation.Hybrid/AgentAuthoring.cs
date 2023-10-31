@@ -29,7 +29,7 @@ namespace ProjectDawn.Navigation.Hybrid
     /// </summary>
     [AddComponentMenu("Agents Navigation/Agent")]
     [DisallowMultipleComponent]
-    [HelpURL("https://lukaschod.github.io/agents-navigation-docs/manual/authoring.html")]
+    [HelpURL("https://lukaschod.github.io/agents-navigation-docs/manual/game-objects/agent.html")]
     public class AgentAuthoring : EntityBehaviour
     {
         [SerializeField]

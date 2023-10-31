@@ -351,7 +351,7 @@ namespace ProjectDawn.Navigation
                 if (maxCount == 0)
                     return QueryCircle(center, radius, ref action);
 
-                var entries = new FixedEntries(center.xy, -1, float.MaxValue, 16);
+                var entries = new FixedEntries(center.xy, -1, float.MaxValue, maxCount);
 
                 var map = m_Map;
 
@@ -585,7 +585,7 @@ namespace ProjectDawn.Navigation
 
             unsafe struct FixedEntries
             {
-                public const int Capacity = 32;
+                public const int Capacity = 16;
 
                 float2 m_Center;
                 fixed int m_Indices[Capacity];
@@ -635,7 +635,7 @@ namespace ProjectDawn.Navigation
 
                     // Failed to find min entry index
                     if (minEntryIndex == -1)
-                        return false;
+                        return true;
 
                     // Update entry with new one
                     m_Indices[minEntryIndex] = index;

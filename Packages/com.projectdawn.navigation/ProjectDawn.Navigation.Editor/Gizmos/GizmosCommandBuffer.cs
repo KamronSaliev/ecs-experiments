@@ -16,13 +16,6 @@ namespace ProjectDawn.Navigation
             m_Commands = new NativeList<byte>(1024 * 8, allocator);
         }
 
-        /// <summary>An extension of EntityCommandBuffer that allows concurrent (deterministic) command buffer recording.</summary>
-        /// <returns>The <see cref="ParallelWriter"/> that can be used to record commands in parallel.</returns>
-        public ParallelWriter AsParallelWriter()
-        {
-            return new ParallelWriter(m_Commands);
-        }
-
         public void Execute()
         {
 #if UNITY_EDITOR
@@ -95,6 +88,98 @@ namespace ProjectDawn.Navigation
 #endif
         }
 
+        public void DrawSolidArc(float3 center, float3 normal, float3 from, float angle, float radius, Color color)
+        {
+            Write(CommandType.SolidArc);
+            Write(color);
+            Write(center);
+            Write(normal);
+            Write(from);
+            Write(angle);
+            Write(radius);
+            WriteEnd();
+        }
+
+        public void DrawWireArc(float3 center, float3 normal, float3 from, float angle, float radius, Color color)
+        {
+            Write(CommandType.WireArc);
+            Write(color);
+            Write(center);
+            Write(normal);
+            Write(from);
+            Write(angle);
+            Write(radius);
+            WriteEnd();
+        }
+
+        public void DrawSolidDisc(float3 center, float3 normal, float radius, Color color)
+        {
+            Write(CommandType.SolidDisc);
+            Write(color);
+            Write(center);
+            Write(normal);
+            Write(radius);
+            WriteEnd();
+        }
+
+        public void DrawWireBox(float3 position, float3 size, Color color)
+        {
+            Write(CommandType.WireBox);
+            Write(color);
+            Write(position);
+            Write(size);
+            WriteEnd();
+        }
+
+        public void DrawLine(float3 from, float3 to, Color color)
+        {
+            Write(CommandType.Line);
+            Write(color);
+            Write(from);
+            Write(to);
+            WriteEnd();
+        }
+
+        public void DrawArrow(float3 origin, float3 direction, float size, Color color)
+        {
+            Write(CommandType.Arrow);
+            Write(color);
+            Write(origin);
+            Write(direction);
+            Write(size);
+            WriteEnd();
+        }
+
+        public void DrawAAConvexPolygon(NativeArray<float3> vertices, Color color, bool zTest = false)
+        {
+            Write(CommandType.AAConvexPolygon);
+            Write(color);
+            Write(zTest);
+            Write(vertices.Length);
+            m_Commands.AddRange(vertices.GetUnsafePtr(), sizeof(float3) * vertices.Length);
+            WriteEnd();
+        }
+
+        public void DrawQuad(float3 a, float3 b, float3 c, float3 d, Color color, bool zTest = false)
+        {
+            Write(CommandType.Quad);
+            Write(color);
+            Write(zTest);
+            Write(a);
+            Write(b);
+            Write(c);
+            Write(d);
+            WriteEnd();
+        }
+
+        void Write<T>(T value) where T : unmanaged
+        {
+            m_Commands.AddRange(&value, sizeof(T));
+        }
+
+        [Conditional("ENABLE_UNITY_COLLECTIONS_CHECKS")]
+        void WriteEnd() => Write(CommandType.None);
+
         Reader AsReader()
         {
             return new Reader(m_Commands);
@@ -142,108 +227,6 @@ namespace ProjectDawn.Navigation
                 if (Read<CommandType>() != CommandType.None)
                     throw new InvalidOperationException($"Draw command {command} failed to read end.");
             }
-        }
-
-        public struct ParallelWriter
-        {
-            NativeList<byte>.ParallelWriter m_Commands;
-
-            public ParallelWriter(NativeList<byte> commands)
-            {
-                m_Commands = commands.AsParallelWriter();
-            }
-
-            public void DrawSolidArc(float3 center, float3 normal, float3 from, float angle, float radius, Color color)
-            {
-                Write(CommandType.SolidArc);
-                Write(color);
-                Write(center);
-                Write(normal);
-                Write(from);
-                Write(angle);
-                Write(radius);
-                WriteEnd();
-            }
-
-            public void DrawWireArc(float3 center, float3 normal, float3 from, float angle, float radius, Color color)
-            {
-                Write(CommandType.WireArc);
-                Write(color);
-                Write(center);
-                Write(normal);
-                Write(from);
-                Write(angle);
-                Write(radius);
-                WriteEnd();
-            }
-
-            public void DrawSolidDisc(float3 center, float3 normal, float radius, Color color)
-            {
-                Write(CommandType.SolidDisc);
-                Write(color);
-                Write(center);
-                Write(normal);
-                Write(radius);
-                WriteEnd();
-            }
-
-            public void DrawWireBox(float3 position, float3 size, Color color)
-            {
-                Write(CommandType.WireBox);
-                Write(color);
-                Write(position);
-                Write(size);
-                WriteEnd();
-            }
-
-            public void DrawLine(float3 from, float3 to, Color color)
-            {
-                Write(CommandType.Line);
-                Write(color);
-                Write(from);
-                Write(to);
-                WriteEnd();
-            }
-
-            public void DrawArrow(float3 origin, float3 direction, float size, Color color)
-            {
-                Write(CommandType.Arrow);
-                Write(color);
-                Write(origin);
-                Write(direction);
-                Write(size);
-                WriteEnd();
-            }
-
-            public void DrawAAConvexPolygon(NativeArray<float3> vertices, Color color, bool zTest = false)
-            {
-                Write(CommandType.AAConvexPolygon);
-                Write(color);
-                Write(zTest);
-                Write(vertices.Length);
-                m_Commands.AddRangeNoResize(vertices.GetUnsafePtr(), sizeof(float3) * vertices.Length);
-                WriteEnd();
-            }
-
-            public void DrawQuad(float3 a, float3 b, float3 c, float3 d, Color color, bool zTest = false)
-            {
-                Write(CommandType.Quad);
-                Write(color);
-                Write(zTest);
-                Write(a);
-                Write(b);
-                Write(c);
-                Write(d);
-                WriteEnd();
-            }
-
-            void Write<T>(T value) where T : unmanaged
-            {
-                m_Commands.AddRangeNoResize(&value, sizeof(T));
-            }
-
-            [Conditional("ENABLE_UNITY_COLLECTIONS_CHECKS")]
-            void WriteEnd() => Write(CommandType.None);
         }
 
         enum CommandType

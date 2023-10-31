@@ -39,11 +39,11 @@ namespace ProjectDawn.Navigation.Editor
 
             new AgentAvoidJob
             {
-                Gizmos = gizmos.ValueRW.CreateCommandBuffer().AsParallelWriter(),
+                Gizmos = gizmos.ValueRW.CreateCommandBuffer(),
                 Spatial = spatial,
                 NavMeshWallHandle = m_NavMeshWallHandle,
                 NavMeshWallLookup = m_NavMeshWallLookup,
-            }.ScheduleParallel();
+            }.Schedule();
         }
 
         [BurstCompile]
@@ -61,7 +61,7 @@ namespace ProjectDawn.Navigation.Editor
             public BufferLookup<NavMeshWall> NavMeshWallLookup;
             bool HasNavMeshWall;
 
-            public GizmosCommandBuffer.ParallelWriter Gizmos;
+            public GizmosCommandBuffer Gizmos;
 
             public void Execute(Entity entity, in AgentBody body, in AgentShape shape, in AgentSonarAvoid avoid, in LocalTransform transform, in DrawGizmos drawGizmos)
             {
@@ -213,7 +213,7 @@ namespace ProjectDawn.Navigation.Editor
 
             struct DrawArc : SonarAvoidance.IDrawArc
             {
-                public GizmosCommandBuffer.ParallelWriter Gizmos;
+                public GizmosCommandBuffer Gizmos;
                 public float InnerRadius;
                 public float OuterRadius;
                 void SonarAvoidance.IDrawArc.DrawArc(float3 position, float3 up, float3 from, float3 to, float angle, UnityEngine.Color color)
@@ -229,7 +229,7 @@ namespace ProjectDawn.Navigation.Editor
 
             struct DrawCircle : SonarAvoidance.IDrawCircle
             {
-                public GizmosCommandBuffer.ParallelWriter Gizmos;
+                public GizmosCommandBuffer Gizmos;
 
                 void SonarAvoidance.IDrawCircle.DrawCircle(float3 center, float3 up, float radius, Color color)
                 {
