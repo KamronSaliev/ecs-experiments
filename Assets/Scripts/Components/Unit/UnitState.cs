@@ -6,5 +6,7 @@ namespace ECSExperiments.Components.Unit
         Move,
         Follow,
         Attack
+        
+        // TODO: add rise state after spawn
     }
 }
