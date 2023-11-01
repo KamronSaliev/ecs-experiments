@@ -4,8 +4,7 @@ namespace ECSExperiments.Input
 {
     public class InputSelectionView : MonoBehaviour
     {
-        [SerializeField] 
-        private RectTransform _rectTransform;
+        [SerializeField] private RectTransform _rectTransform;
 
         private Rect _rect;
 
@@ -16,13 +15,10 @@ namespace ECSExperiments.Input
                 gameObject.SetActive(true);
             }
 
-            var position = rect.center;
-            _rectTransform.localPosition = position;
-            _rect.center = position;
-
-            var size = rect.size;
-            _rectTransform.sizeDelta = size;
-            _rect.size = size;
+            _rectTransform.localPosition = rect.center;
+            _rect.center = rect.center;
+            _rectTransform.sizeDelta = rect.size;
+            _rect.size = rect.size;
         }
 
         public void Hide()
