@@ -4,7 +4,8 @@ namespace ECSExperiments.Input
 {
     public class InputSelectionView : MonoBehaviour
     {
-        [SerializeField] private RectTransform _rectTransform;
+        [SerializeField] 
+        private RectTransform _rectTransform;
 
         private Rect _rect;
 

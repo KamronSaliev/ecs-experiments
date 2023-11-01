@@ -10,7 +10,7 @@ namespace ECSExperiments.Input
     {
         private NativeList<Entity> _selectedEntities;
         private InputSelectionView _inputSelectionView;
-        private InputControlsAuthoring _inputControlsAuthoring;
+        private InputSelectionAuthoring _inputSelectionAuthoring;
         private Camera _camera;
 
         public struct Singleton : IComponentData
@@ -23,9 +23,9 @@ namespace ECSExperiments.Input
             _selectedEntities = new NativeList<Entity>(Allocator.Persistent);
 
             // TODO: refactor
-            _inputControlsAuthoring = Object.FindObjectOfType<InputControlsAuthoring>(true);
+            _inputSelectionAuthoring = Object.FindObjectOfType<InputSelectionAuthoring>(true);
             _inputSelectionView = Object.FindObjectOfType<InputSelectionView>(true);
-            
+
             _camera = Camera.main;
 
             World.EntityManager.CreateSingleton(new Singleton
@@ -33,45 +33,43 @@ namespace ECSExperiments.Input
                 SelectedEntities = _selectedEntities
             });
 
-            _inputControlsAuthoring.SelectionFinished += OnSelectionFinished;
+            _inputSelectionAuthoring.SelectionFinished += OnSelectionFinished;
         }
 
         protected override void OnDestroy()
         {
             _selectedEntities.Dispose();
             
-            _inputControlsAuthoring.SelectionFinished -= OnSelectionFinished;
+            _inputSelectionAuthoring.SelectionFinished -= OnSelectionFinished;
         }
 
         protected override void OnUpdate()
         {
-            if (_inputControlsAuthoring.IsSelectionActive)
+            if (_inputSelectionAuthoring.IsSelectionActive)
             {
-                _inputSelectionView.Show(_inputControlsAuthoring.CurrentSelectionRect);
+                _inputSelectionView.Show(_inputSelectionAuthoring.CurrentSelectionRect);
             }
         }
-        
-        // TODO: Refactor
+
         private void OnSelectionFinished()
         {
             var selectionSingleton = SystemAPI.GetSingletonRW<Singleton>();
             var selectedEntities = selectionSingleton.ValueRW.SelectedEntities;
-            
             selectedEntities.Clear();
 
             foreach (var (_, localTransform, entity) in SystemAPI.Query<UnitComponent, LocalTransform>()
                          .WithEntityAccess())
             {
                 var position = _camera.WorldToScreenPoint(localTransform.Position);
-
-                if (_inputControlsAuthoring.CurrentSelectionRect.Contains(position))
+                
+                if (_inputSelectionAuthoring.CurrentSelectionRect.Contains(position))
                 {
                     selectedEntities.Add(entity);
                 }
             }
-            
-            Debug.Log($"selectedEntities: {selectedEntities.Length}");
 
+            Debug.Log($"selectedEntities: {selectedEntities.Length}");
+            
             _inputSelectionView.Hide();
         }
     }

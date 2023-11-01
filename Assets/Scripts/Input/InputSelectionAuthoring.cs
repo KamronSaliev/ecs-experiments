@@ -5,17 +5,16 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 
 namespace ECSExperiments.Input
 {
-    public class InputControlsAuthoring : MonoBehaviour
+    public class InputSelectionAuthoring : MonoBehaviour
     {
         public event Action SelectionStarted;
         public event Action SelectionFinished;
-        
-        public bool IsSelectionActive => _isSelectionActive;
+
+        public bool IsSelectionActive { get; private set; }
 
         public Rect CurrentSelectionRect { get; private set; }
-        
+
         private float2 _selectionStartPosition;
-        private bool _isSelectionActive;
         private EnhancedTouch.Finger _currentFinger;
 
         private void OnEnable()
@@ -42,10 +41,11 @@ namespace ECSExperiments.Input
             }
 
             Debug.Log($"OnFingerDown: {finger.screenPosition}");
-            
+
             _currentFinger = finger;
             _selectionStartPosition = finger.screenPosition;
-            _isSelectionActive = true;
+            IsSelectionActive = true;
+            SelectionStarted?.Invoke();
         }
 
         private void OnFingerMove(EnhancedTouch.Finger finger)
@@ -68,10 +68,11 @@ namespace ECSExperiments.Input
             }
 
             Debug.Log($"OnFingerUp: {finger.screenPosition}");
-            
+
+            SelectionFinished?.Invoke();
             CurrentSelectionRect = new Rect();
             _currentFinger = null;
-            _isSelectionActive = false;
+            IsSelectionActive = false;
         }
     }
 }
