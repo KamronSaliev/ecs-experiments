@@ -15,7 +15,7 @@ namespace ECSExperiments.Authoring
             
             AddComponent<DrawGizmos>(entity);
 
-            AddComponent(entity, new UnitTeamComponent
+            AddComponent(entity, new UnitComponent
             {
                 Value = authoring.UnitTeamID
             });
