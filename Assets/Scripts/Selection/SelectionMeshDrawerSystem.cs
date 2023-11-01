@@ -1,10 +1,9 @@
-using ECSExperiments.Mono;
 using ProjectDawn.Navigation;
 using Unity.Entities;
 using Unity.Transforms;
 using Object = UnityEngine.Object;
 
-namespace ECSExperiments.Input
+namespace ECSExperiments.Selection
 {
     public partial class SelectionMeshDrawerSystem : SystemBase
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ECSExperiments.Input
+namespace ECSExperiments.Selection
 {
     public class SelectionView : MonoBehaviour
     {

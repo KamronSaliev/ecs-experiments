@@ -4,13 +4,13 @@ using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
 
-namespace ECSExperiments.Input
+namespace ECSExperiments.Selection
 {
     public partial class SelectionSystem : SystemBase
     {
         private NativeList<Entity> _selectedEntities;
         private SelectionView _selectionView;
-        private Selection _selection;
+        private ECSExperiments.Selection.Selection _selection;
         private Camera _camera;
 
         public struct Singleton : IComponentData
@@ -21,7 +21,7 @@ namespace ECSExperiments.Input
         protected override void OnCreate()
         {
             // TODO: refactor
-            _selection = Object.FindObjectOfType<Selection>(true);
+            _selection = Object.FindObjectOfType<ECSExperiments.Selection.Selection>(true);
             _selectionView = Object.FindObjectOfType<SelectionView>(true);
             
             _selectedEntities = new NativeList<Entity>(Allocator.Persistent);

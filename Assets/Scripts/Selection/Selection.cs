@@ -3,7 +3,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 
-namespace ECSExperiments.Input
+namespace ECSExperiments.Selection
 {
     public class Selection : MonoBehaviour
     {

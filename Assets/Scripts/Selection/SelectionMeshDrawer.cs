@@ -1,7 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace ECSExperiments.Mono
+namespace ECSExperiments.Selection
 {
     public class SelectionMeshDrawer : MonoBehaviour
     {
