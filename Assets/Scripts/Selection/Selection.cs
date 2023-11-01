@@ -7,7 +7,6 @@ namespace ECSExperiments.Selection
 {
     public class Selection : MonoBehaviour
     {
-        public event Action SelectionStarted;
         public event Action SelectionFinished;
 
         public bool IsSelectionActive { get; private set; }
@@ -45,7 +44,6 @@ namespace ECSExperiments.Selection
             _currentFinger = finger;
             _selectionStartPosition = finger.screenPosition;
             IsSelectionActive = true;
-            SelectionStarted?.Invoke();
         }
 
         private void OnFingerMove(EnhancedTouch.Finger finger)

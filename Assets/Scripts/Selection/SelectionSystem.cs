@@ -10,7 +10,7 @@ namespace ECSExperiments.Selection
     {
         private NativeList<Entity> _selectedEntities;
         private SelectionView _selectionView;
-        private ECSExperiments.Selection.Selection _selection;
+        private Selection _selection;
         private Camera _camera;
 
         public struct Singleton : IComponentData
@@ -21,9 +21,9 @@ namespace ECSExperiments.Selection
         protected override void OnCreate()
         {
             // TODO: refactor
-            _selection = Object.FindObjectOfType<ECSExperiments.Selection.Selection>(true);
+            _selection = Object.FindObjectOfType<Selection>(true);
             _selectionView = Object.FindObjectOfType<SelectionView>(true);
-            
+
             _selectedEntities = new NativeList<Entity>(Allocator.Persistent);
 
             _camera = Camera.main;
@@ -39,7 +39,7 @@ namespace ECSExperiments.Selection
         protected override void OnDestroy()
         {
             _selectedEntities.Dispose();
-            
+
             _selection.SelectionFinished -= OnSelectionFinished;
         }
 
@@ -49,7 +49,7 @@ namespace ECSExperiments.Selection
             {
                 return;
             }
-            
+
             if (_selection.IsSelectionActive)
             {
                 _selectionView.Show(_selection.CurrentSelectionRect);
@@ -66,15 +66,15 @@ namespace ECSExperiments.Selection
                          .WithEntityAccess())
             {
                 var position = _camera.WorldToScreenPoint(localTransform.Position);
-                
+
                 if (_selection.CurrentSelectionRect.Contains(position))
                 {
                     selectedEntities.Add(entity);
                 }
             }
 
-            Debug.Log($"selectedEntities: {selectedEntities.Length}");
-            
+            Debug.Log($"Selected Entities: {selectedEntities.Length}");
+
             _selectionView.Hide();
         }
     }
