@@ -5,7 +5,7 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 
 namespace ECSExperiments.Input
 {
-    public class InputSelectionAuthoring : MonoBehaviour
+    public class Selection : MonoBehaviour
     {
         public event Action SelectionStarted;
         public event Action SelectionFinished;

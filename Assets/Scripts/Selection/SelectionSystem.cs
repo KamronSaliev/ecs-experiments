@@ -6,11 +6,11 @@ using UnityEngine;
 
 namespace ECSExperiments.Input
 {
-    public partial class InputSelectionSystem : SystemBase
+    public partial class SelectionSystem : SystemBase
     {
         private NativeList<Entity> _selectedEntities;
-        private InputSelectionView _inputSelectionView;
-        private InputSelectionAuthoring _inputSelectionAuthoring;
+        private SelectionView _selectionView;
+        private Selection _selection;
         private Camera _camera;
 
         public struct Singleton : IComponentData
@@ -20,11 +20,11 @@ namespace ECSExperiments.Input
 
         protected override void OnCreate()
         {
-            _selectedEntities = new NativeList<Entity>(Allocator.Persistent);
-
             // TODO: refactor
-            _inputSelectionAuthoring = Object.FindObjectOfType<InputSelectionAuthoring>(true);
-            _inputSelectionView = Object.FindObjectOfType<InputSelectionView>(true);
+            _selection = Object.FindObjectOfType<Selection>(true);
+            _selectionView = Object.FindObjectOfType<SelectionView>(true);
+            
+            _selectedEntities = new NativeList<Entity>(Allocator.Persistent);
 
             _camera = Camera.main;
 
@@ -33,21 +33,26 @@ namespace ECSExperiments.Input
                 SelectedEntities = _selectedEntities
             });
 
-            _inputSelectionAuthoring.SelectionFinished += OnSelectionFinished;
+            _selection.SelectionFinished += OnSelectionFinished;
         }
 
         protected override void OnDestroy()
         {
             _selectedEntities.Dispose();
             
-            _inputSelectionAuthoring.SelectionFinished -= OnSelectionFinished;
+            _selection.SelectionFinished -= OnSelectionFinished;
         }
 
         protected override void OnUpdate()
         {
-            if (_inputSelectionAuthoring.IsSelectionActive)
+            if (_selection == null || _selectionView == null)
             {
-                _inputSelectionView.Show(_inputSelectionAuthoring.CurrentSelectionRect);
+                return;
+            }
+            
+            if (_selection.IsSelectionActive)
+            {
+                _selectionView.Show(_selection.CurrentSelectionRect);
             }
         }
 
@@ -62,7 +67,7 @@ namespace ECSExperiments.Input
             {
                 var position = _camera.WorldToScreenPoint(localTransform.Position);
                 
-                if (_inputSelectionAuthoring.CurrentSelectionRect.Contains(position))
+                if (_selection.CurrentSelectionRect.Contains(position))
                 {
                     selectedEntities.Add(entity);
                 }
@@ -70,7 +75,7 @@ namespace ECSExperiments.Input
 
             Debug.Log($"selectedEntities: {selectedEntities.Length}");
             
-            _inputSelectionView.Hide();
+            _selectionView.Hide();
         }
     }
 }

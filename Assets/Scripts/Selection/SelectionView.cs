@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ECSExperiments.Input
 {
-    public class InputSelectionView : MonoBehaviour
+    public class SelectionView : MonoBehaviour
     {
         [SerializeField] private RectTransform _rectTransform;
 

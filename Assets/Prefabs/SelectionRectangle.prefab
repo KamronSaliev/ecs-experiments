@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 11400000}
   - component: {fileID: 8203951259948854623}
   m_Layer: 5
-  m_Name: SelectionRectangleDemo
+  m_Name: SelectionRectangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
