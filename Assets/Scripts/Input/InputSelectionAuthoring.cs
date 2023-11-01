@@ -7,6 +7,7 @@ namespace ECSExperiments.Input
 {
     public class InputControlsAuthoring : MonoBehaviour
     {
+        public event Action SelectionStarted;
         public event Action SelectionFinished;
         
         public bool IsSelectionActive => _isSelectionActive;
@@ -71,7 +72,6 @@ namespace ECSExperiments.Input
             CurrentSelectionRect = new Rect();
             _currentFinger = null;
             _isSelectionActive = false;
-            SelectionFinished?.Invoke();
         }
     }
 }
