@@ -10,7 +10,7 @@ namespace ECSExperiments.Selection
     {
         private NativeList<Entity> _selectedEntities;
         private SelectionView _selectionView;
-        private Selection _selection;
+        private SelectionHandler _selectionHandler;
         private Camera _camera;
 
         public struct Singleton : IComponentData
@@ -21,7 +21,7 @@ namespace ECSExperiments.Selection
         protected override void OnCreate()
         {
             // TODO: refactor
-            _selection = Object.FindObjectOfType<Selection>(true);
+            _selectionHandler = Object.FindObjectOfType<SelectionHandler>(true);
             _selectionView = Object.FindObjectOfType<SelectionView>(true);
 
             _selectedEntities = new NativeList<Entity>(Allocator.Persistent);
@@ -33,26 +33,26 @@ namespace ECSExperiments.Selection
                 SelectedEntities = _selectedEntities
             });
 
-            _selection.SelectionFinished += OnSelectionFinished;
+            _selectionHandler.SelectionFinished += OnSelectionFinished;
         }
 
         protected override void OnDestroy()
         {
             _selectedEntities.Dispose();
 
-            _selection.SelectionFinished -= OnSelectionFinished;
+            _selectionHandler.SelectionFinished -= OnSelectionFinished;
         }
 
         protected override void OnUpdate()
         {
-            if (_selection == null || _selectionView == null)
+            if (_selectionHandler == null || _selectionView == null)
             {
                 return;
             }
 
-            if (_selection.IsSelectionActive)
+            if (_selectionHandler.IsSelectionActive)
             {
-                _selectionView.Show(_selection.CurrentSelectionRect);
+                _selectionView.Show(_selectionHandler.CurrentSelectionRect);
             }
         }
 
@@ -62,18 +62,16 @@ namespace ECSExperiments.Selection
             var selectedEntities = selectionSingleton.ValueRW.SelectedEntities;
             selectedEntities.Clear();
 
-            foreach (var (_, localTransform, entity) in SystemAPI.Query<UnitComponent, LocalTransform>()
+            foreach (var (_, localTransform, entity) in SystemAPI.Query<Unit, LocalTransform>()
                          .WithEntityAccess())
             {
                 var position = _camera.WorldToScreenPoint(localTransform.Position);
 
-                if (_selection.CurrentSelectionRect.Contains(position))
+                if (_selectionHandler.CurrentSelectionRect.Contains(position))
                 {
                     selectedEntities.Add(entity);
                 }
             }
-
-            Debug.Log($"Selected Entities: {selectedEntities.Length}");
 
             _selectionView.Hide();
         }

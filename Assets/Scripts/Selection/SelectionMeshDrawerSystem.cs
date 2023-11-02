@@ -24,24 +24,11 @@ namespace ECSExperiments.Selection
 
             var selection = SystemAPI.GetSingleton<SelectionSystem.Singleton>();
 
-            if (selection.SelectedEntities.IsEmpty)
-            {
-                return;
-            }
-
-            var shapeLookup = GetComponentLookup<AgentShape>(true);
-            var transformLookup = GetComponentLookup<LocalTransform>(true);
-
-            Dependency.Complete();
-
             foreach (var entity in selection.SelectedEntities)
             {
-                if (!shapeLookup.TryGetComponent(entity, out var shape) ||
-                    !transformLookup.TryGetComponent(entity, out var transform))
-                {
-                    continue;
-                }
-
+                var shape = EntityManager.GetComponentData<AgentShape>(entity);
+                var transform = EntityManager.GetComponentData<LocalTransform>(entity);
+                
                 // TODO: serialize for different unit scales later
                 _selectionMeshDrawer.Draw(transform.Position, shape.Radius * 3.0f);
             }

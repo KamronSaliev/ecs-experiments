@@ -1,1 +1,56 @@
-{}
+{
+    "name": "InputControlActions",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "6e1392bf-47d0-4294-8a30-09fa08e1627d",
+            "actions": [
+                {
+                    "name": "Selection",
+                    "type": "Value",
+                    "id": "66e64648-3ee6-49a6-a2d4-2adabed46f07",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "One Modifier",
+                    "id": "bc0a0019-654a-4dcc-8814-be43d8e51807",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Selection",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "aa051bfe-9f31-4f40-b133-e0bddb12bbec",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Selection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "a22f7366-01fa-4fa7-923c-e266b0849875",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Selection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
