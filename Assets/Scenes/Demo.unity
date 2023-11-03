@@ -771,6 +771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1435128419}
   - component: {fileID: 1435128418}
+  - component: {fileID: 1435128420}
   m_Layer: 0
   m_Name: Selection
   m_TagString: Untagged
@@ -805,6 +806,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1435128420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435128417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 6e09119d20fc8458b9b44d0fcaff8d5a,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1435128418}
+        m_TargetAssemblyTypeName: ECSExperiments.Selection.SelectionHandler, Assembly-CSharp
+        m_MethodName: HandleSelection
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 66e64648-3ee6-49a6-a2d4-2adabed46f07
+    m_ActionName: Gameplay/Selection[/Mouse/leftButton,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1435128418}
+        m_TargetAssemblyTypeName: ECSExperiments.Selection.SelectionHandler, Assembly-CSharp
+        m_MethodName: SetMovementMarker
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 27b494b7-ef8e-4b57-b265-e8b2d12d8976
+    m_ActionName: Gameplay/SetMovementMarker[/Mouse/rightButton,/Mouse/position]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1570522769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1074,79 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1807054952}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4349443263302917927
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 312324966003473556, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104227714020497555, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104227714020497555, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104227714020497555, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104227714020497555, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104227714020497555, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104227714020497555, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104227714020497555, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104227714020497555, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104227714020497555, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104227714020497555, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7460213709440150681, guid: ba83cb433ed214e19ad070cb36b4c3b0,
+        type: 3}
+      propertyPath: m_Name
+      value: Confirmation
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ba83cb433ed214e19ad070cb36b4c3b0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1021,3 +1158,4 @@ SceneRoots:
   - {fileID: 1435128419}
   - {fileID: 1570522773}
   - {fileID: 285619315}
+  - {fileID: 4349443263302917927}

@@ -171,11 +171,11 @@ MonoBehaviour:
   _dimensions:
     x: 25
     y: 25
-  _positionsCount: 10
+  _positionsCount: 50
   _demoPrefab: {fileID: 14975308294066400, guid: 40686a6c484c6574386f4e9f32d9d9d9,
     type: 3}
   _randomSeed: 42
-  _unitSpawnRate: 60
+  _unitSpawnRate: 1
   _unitPrefab: {fileID: 9044115827107593775, guid: c0ccb488695fc274198cb7fcf7ed14df,
     type: 3}
 --- !u!1660057539 &9223372036854775807
