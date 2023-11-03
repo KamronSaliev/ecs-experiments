@@ -6,10 +6,19 @@
             "id": "6e1392bf-47d0-4294-8a30-09fa08e1627d",
             "actions": [
                 {
-                    "name": "Selection",
+                    "name": "Select",
                     "type": "Value",
                     "id": "66e64648-3ee6-49a6-a2d4-2adabed46f07",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SetMovementMarker",
+                    "type": "Value",
+                    "id": "27b494b7-ef8e-4b57-b265-e8b2d12d8976",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -23,7 +32,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Selection",
+                    "action": "Select",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -34,7 +43,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Selection",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -45,7 +54,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Selection",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "3519e8c0-4c11-4106-8047-0d1ad933b626",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SetMovementMarker",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "b4ef5f6d-a085-4401-8107-d86c127e4cef",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SetMovementMarker",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "fece23de-29c1-494f-b10c-28e770753c8d",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SetMovementMarker",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

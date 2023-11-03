@@ -15,6 +15,14 @@ namespace ECSExperiments.Selection
 
         private float2 _selectionStartPosition;
 
+        public void SetMovementMarker(InputAction.CallbackContext callbackContext)
+        {
+            if (callbackContext.phase == InputActionPhase.Started)
+            {
+                Debug.Log($"SetMovementMarker {callbackContext.ReadValue<Vector2>()}");
+            }
+        }
+        
         public void HandleSelection(InputAction.CallbackContext callbackContext)
         {
             switch (callbackContext.phase)
@@ -26,7 +34,7 @@ namespace ECSExperiments.Selection
                     HandleSelectionPerformed(callbackContext);
                     break;
                 case InputActionPhase.Canceled:
-                    HandleSelectionFinished(callbackContext);
+                    HandleSelectionFinished();
                     break;
             }
         }
@@ -45,7 +53,7 @@ namespace ECSExperiments.Selection
             CurrentSelectionRect = new Rect(min, max - min);
         }
 
-        private void HandleSelectionFinished(InputAction.CallbackContext callbackContext)
+        private void HandleSelectionFinished()
         {
             SelectionFinished?.Invoke();
             CurrentSelectionRect = new Rect();

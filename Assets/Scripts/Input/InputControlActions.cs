@@ -28,10 +28,19 @@ public partial class @InputControlActions: IInputActionCollection2, IDisposable
             ""id"": ""6e1392bf-47d0-4294-8a30-09fa08e1627d"",
             ""actions"": [
                 {
-                    ""name"": ""Selection"",
+                    ""name"": ""Select"",
                     ""type"": ""Value"",
                     ""id"": ""66e64648-3ee6-49a6-a2d4-2adabed46f07"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SetMovementMarker"",
+                    ""type"": ""Value"",
+                    ""id"": ""27b494b7-ef8e-4b57-b265-e8b2d12d8976"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -45,7 +54,7 @@ public partial class @InputControlActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Selection"",
+                    ""action"": ""Select"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -56,7 +65,7 @@ public partial class @InputControlActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Selection"",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -67,7 +76,40 @@ public partial class @InputControlActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Selection"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""3519e8c0-4c11-4106-8047-0d1ad933b626"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SetMovementMarker"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""b4ef5f6d-a085-4401-8107-d86c127e4cef"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SetMovementMarker"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""fece23de-29c1-494f-b10c-28e770753c8d"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SetMovementMarker"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -78,7 +120,8 @@ public partial class @InputControlActions: IInputActionCollection2, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Selection = m_Gameplay.FindAction("Selection", throwIfNotFound: true);
+        m_Gameplay_Select = m_Gameplay.FindAction("Select", throwIfNotFound: true);
+        m_Gameplay_SetMovementMarker = m_Gameplay.FindAction("SetMovementMarker", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -140,12 +183,14 @@ public partial class @InputControlActions: IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-    private readonly InputAction m_Gameplay_Selection;
+    private readonly InputAction m_Gameplay_Select;
+    private readonly InputAction m_Gameplay_SetMovementMarker;
     public struct GameplayActions
     {
         private @InputControlActions m_Wrapper;
         public GameplayActions(@InputControlActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Selection => m_Wrapper.m_Gameplay_Selection;
+        public InputAction @Select => m_Wrapper.m_Gameplay_Select;
+        public InputAction @SetMovementMarker => m_Wrapper.m_Gameplay_SetMovementMarker;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -155,16 +200,22 @@ public partial class @InputControlActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
-            @Selection.started += instance.OnSelection;
-            @Selection.performed += instance.OnSelection;
-            @Selection.canceled += instance.OnSelection;
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+            @SetMovementMarker.started += instance.OnSetMovementMarker;
+            @SetMovementMarker.performed += instance.OnSetMovementMarker;
+            @SetMovementMarker.canceled += instance.OnSetMovementMarker;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
         {
-            @Selection.started -= instance.OnSelection;
-            @Selection.performed -= instance.OnSelection;
-            @Selection.canceled -= instance.OnSelection;
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+            @SetMovementMarker.started -= instance.OnSetMovementMarker;
+            @SetMovementMarker.performed -= instance.OnSetMovementMarker;
+            @SetMovementMarker.canceled -= instance.OnSetMovementMarker;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -184,6 +235,7 @@ public partial class @InputControlActions: IInputActionCollection2, IDisposable
     public GameplayActions @Gameplay => new GameplayActions(this);
     public interface IGameplayActions
     {
-        void OnSelection(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnSetMovementMarker(InputAction.CallbackContext context);
     }
 }
