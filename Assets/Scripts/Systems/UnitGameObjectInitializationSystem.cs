@@ -18,8 +18,6 @@ namespace ECSExperiments.Systems
                 var gameObject = Object.Instantiate(gameObjectReference.Value);
                 ecb.RemoveComponent<GameObjectReferenceComponent>(entity);
                 
-                // ecb.RemoveComponent<TagUnitNew>(entity);
-
                 ecb.AddComponent(entity, new TransformReferenceComponent
                 {
                     Value = gameObject.transform
