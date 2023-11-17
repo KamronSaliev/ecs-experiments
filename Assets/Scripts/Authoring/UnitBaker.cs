@@ -15,17 +15,17 @@ namespace ECSExperiments.Authoring
             
             AddComponent<DrawGizmos>(entity);
 
-            AddComponent(entity, new UnitComponent
+            AddComponent(entity, new Unit
             {
-                Value = authoring.UnitTeamID
+                TeamID = authoring.UnitTeamID
             });
 
-            AddComponent(entity, new UnitStateComponent
+            AddComponent(entity, new UnitBrain
             {
-                Value = UnitState.Idle
+                State = UnitBrainState.Idle
             });
 
-            AddComponent(entity, new UnitLifeComponent
+            AddComponent(entity, new UnitLife
             {
                 Life = authoring.MaxLife,
                 MaxLife = authoring.MaxLife

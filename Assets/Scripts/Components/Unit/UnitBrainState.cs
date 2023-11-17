@@ -1,6 +1,6 @@
 namespace ECSExperiments.Components.Unit
 {
-    public enum UnitState
+    public enum UnitBrainState
     {
         Idle,
         Move,
