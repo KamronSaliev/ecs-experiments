@@ -1,2 +1,2 @@
 # ecs-experiments
-Description is coming...
+Experimental RTS project using ECS and Unity DOTS
