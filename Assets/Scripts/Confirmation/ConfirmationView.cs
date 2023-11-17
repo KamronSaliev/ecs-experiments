@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ECSExperiments.Confirmation
 {
-    public class ConfirmationHandler : MonoBehaviour
+    public class ConfirmationView : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
         

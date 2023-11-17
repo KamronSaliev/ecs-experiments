@@ -1,4 +1,5 @@
 using ECSExperiments.Components.Unit;
+using ECSExperiments.Input;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
@@ -6,11 +7,12 @@ using UnityEngine;
 
 namespace ECSExperiments.Selection
 {
+    [RequireMatchingQueriesForUpdate]
     public partial class SelectionSystem : SystemBase
     {
         private NativeList<Entity> _selectedEntities;
         private SelectionView _selectionView;
-        private SelectionHandler _selectionHandler;
+        private InputHandler _inputHandler;
         private Camera _camera;
 
         public struct Singleton : IComponentData
@@ -21,7 +23,7 @@ namespace ECSExperiments.Selection
         protected override void OnCreate()
         {
             // TODO: refactor
-            _selectionHandler = Object.FindObjectOfType<SelectionHandler>(true);
+            _inputHandler = Object.FindObjectOfType<InputHandler>(true);
             _selectionView = Object.FindObjectOfType<SelectionView>(true);
 
             _selectedEntities = new NativeList<Entity>(Allocator.Persistent);
@@ -33,26 +35,26 @@ namespace ECSExperiments.Selection
                 SelectedEntities = _selectedEntities
             });
 
-            _selectionHandler.SelectionFinished += OnSelectionFinished;
+            _inputHandler.SelectionFinished += OnSelectionFinished;
         }
 
         protected override void OnDestroy()
         {
             _selectedEntities.Dispose();
 
-            _selectionHandler.SelectionFinished -= OnSelectionFinished;
+            _inputHandler.SelectionFinished -= OnSelectionFinished;
         }
 
         protected override void OnUpdate()
         {
-            if (_selectionHandler == null || _selectionView == null)
+            if (_inputHandler == null || _selectionView == null)
             {
                 return;
             }
 
-            if (_selectionHandler.IsSelectionActive)
+            if (_inputHandler.IsSelectionActive)
             {
-                _selectionView.Show(_selectionHandler.CurrentSelectionRect);
+                _selectionView.Show(_inputHandler.SelectionRect);
             }
         }
 
@@ -67,7 +69,7 @@ namespace ECSExperiments.Selection
             {
                 var position = _camera.WorldToScreenPoint(localTransform.Position);
 
-                if (_selectionHandler.CurrentSelectionRect.Contains(position))
+                if (_inputHandler.SelectionRect.Contains(position))
                 {
                     selectedEntities.Add(entity);
                 }

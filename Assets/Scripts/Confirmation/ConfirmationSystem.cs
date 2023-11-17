@@ -4,33 +4,42 @@ using UnityEngine;
 
 namespace ECSExperiments.Confirmation
 {
+    [RequireMatchingQueriesForUpdate]
+    [UpdateInGroup(typeof(PresentationSystemGroup))]
     public partial class ConfirmationSystem : SystemBase
     {
-        private ConfirmationHandler _confirmationHandler;
+        private ConfirmationView _confirmationView;
 
         public struct Singleton : IComponentData
         {
             public float3 Position;
+            public bool Play;
         }
 
         protected override void OnCreate()
         {
             // TODO: refactor
-            _confirmationHandler = Object.FindObjectOfType<ConfirmationHandler>(true);
+            _confirmationView = Object.FindObjectOfType<ConfirmationView>(true);
 
             World.EntityManager.CreateSingleton(new Singleton());
         }
 
         protected override void OnUpdate()
         {
-            if (_confirmationHandler == null)
+            if (_confirmationView == null)
             {
                 return;
             }
 
             var confirmation = SystemAPI.GetSingleton<Singleton>();
-            
-            _confirmationHandler.Play(confirmation.Position); // TODO: add event to play on button click
+
+            Dependency.Complete();
+
+            if (confirmation.Play)
+            {
+                _confirmationView.Play(confirmation.Position); // TODO: add event to play on button click
+                confirmation.Play = false;
+            }
         }
     }
 }
